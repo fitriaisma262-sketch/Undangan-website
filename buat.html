@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buat Undangan</title><style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#faf7f2;
+  color:#493d34;
+}
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:25px;
+}
+h1{
+  font-family:Georgia,serif;
+  text-align:center;
+  font-weight:normal;
+}
+label{
+  display:block;
+  margin-top:18px;
+  margin-bottom:7px;
+  font-weight:bold;
+}
+input, textarea, select{
+  width:100%;
+  padding:13px;
+  border:1px solid #d5c9bc;
+  border-radius:10px;
+  font-size:16px;
+  box-sizing:border-box;
+}
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+button{
+  width:100%;
+  margin-top:25px;
+  padding:15px;
+  border:0;
+  border-radius:30px;
+  background:#876f52;
+  color:white;
+  font-size:16px;
+}
+#hasil{
+  margin-top:20px;
+  padding:15px;
+  border-radius:10px;
+  background:#eee2d2;
+  display:none;
+}
+</style></head><body><div class="container"><h1>💍 Buat Undangan</h1><p style="text-align:center;">
+Isi data pasanganmu untuk membuat undangan digital.
+</p><label>Nama Pengantin Wanita</label>
+<input id="nama_wanita" type="text" placeholder="Contoh: Fitria">
+
+<label>Nama Pengantin Pria</label>
+<input id="nama_pria" type="text" placeholder="Contoh: Andi">
+
+<label>Tanggal Acara</label>
+<input id="tanggal_acara" type="date">
+
+<label>Jam Acara</label>
+<input id="jam_acara" type="time">
+
+<label>Lokasi Acara</label>
+<input id="lokasi" type="text" placeholder="Contoh: Gedung Pernikahan">
+
+<label>Love Story</label>
+
+<textarea id="love_story" placeholder="Ceritakan kisah cinta kalian..."></textarea><label>Pilih Template</label>
+<select id="template">
+
+  <option value="floral">🌸 Floral</option>
+  <option value="classic">🤎 Classic</option>
+  <option value="emerald">💚 Emerald</option>
+  <option value="luxury">✨ Luxury</option>
+</select><button onclick="buatUndangan()">
+Buat Undangan
+</button><div id="hasil"></div></div><script>
+
+async function buatUndangan(){
+
+  const data = {
+    nama_wanita: document.getElementById("nama_wanita").value,
+    nama_pria: document.getElementById("nama_pria").value,
+    tanggal_acara: document.getElementById("tanggal_acara").value || null,
+    jam_acara: document.getElementById("jam_acara").value || null,
+    lokasi: document.getElementById("lokasi").value,
+    love_story: document.getElementById("love_story").value,
+    template: document.getElementById("template").value,
+    status: "draft"
+  };
+
+  if(!data.nama_wanita || !data.nama_pria){
+    alert("Nama pengantin wajib diisi.");
+    return;
+  }
+
+  document.getElementById("hasil").style.display="block";
+  document.getElementById("hasil").innerHTML=
+    "Data sudah siap dibuat. Langkah berikutnya adalah menghubungkan formulir ini ke database Supabase.";
+
+}
+
+</script></body>
+  </html>
