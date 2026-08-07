@@ -84,7 +84,8 @@ Isi data pasanganmu untuk membuat undangan digital.
 Buat Undangan
 </button><div id="hasil"></div></div><script>
 
-async function buatUndangan(){
+terusconst SUPABASE_URL = "https://yacmjyomakfdkmxeihbb.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_T67eRn0MhIBTZxOv07gyRA_e9kiK_Wo";
 
   const data = {
     nama_wanita: document.getElementById("nama_wanita").value,
