@@ -1,30 +1,38 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buat Undangan</title><style>
+
+<title>Buat Undangan</title>
+
+<style>
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:#faf7f2;
   color:#493d34;
 }
+
 .container{
   max-width:600px;
   margin:auto;
   padding:25px;
 }
+
 h1{
   font-family:Georgia,serif;
   text-align:center;
   font-weight:normal;
 }
+
 label{
   display:block;
   margin-top:18px;
   margin-bottom:7px;
   font-weight:bold;
 }
+
 input, textarea, select{
   width:100%;
   padding:13px;
@@ -33,10 +41,12 @@ input, textarea, select{
   font-size:16px;
   box-sizing:border-box;
 }
+
 textarea{
   min-height:120px;
   resize:vertical;
 }
+
 button{
   width:100%;
   margin-top:25px;
@@ -47,6 +57,7 @@ button{
   color:white;
   font-size:16px;
 }
+
 #hasil{
   margin-top:20px;
   padding:15px;
@@ -54,9 +65,20 @@ button{
   background:#eee2d2;
   display:none;
 }
-</style></head><body><div class="container"><h1>💍 Buat Undangan</h1><p style="text-align:center;">
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💍 Buat Undangan</h1>
+
+<p style="text-align:center;">
 Isi data pasanganmu untuk membuat undangan digital.
-</p><label>Nama Pengantin Wanita</label>
+</p>
+
+<label>Nama Pengantin Wanita</label>
 <input id="nama_wanita" type="text" placeholder="Contoh: Fitria">
 
 <label>Nama Pengantin Pria</label>
@@ -72,20 +94,31 @@ Isi data pasanganmu untuk membuat undangan digital.
 <input id="lokasi" type="text" placeholder="Contoh: Gedung Pernikahan">
 
 <label>Love Story</label>
+<textarea id="love_story" placeholder="Ceritakan kisah cinta kalian..."></textarea>
 
-<textarea id="love_story" placeholder="Ceritakan kisah cinta kalian..."></textarea><label>Pilih Template</label>
+<label>Pilih Template</label>
+
 <select id="template">
-
   <option value="floral">🌸 Floral</option>
   <option value="classic">🤎 Classic</option>
   <option value="emerald">💚 Emerald</option>
   <option value="luxury">✨ Luxury</option>
-</select><button onclick="buatUndangan()">
-Buat Undangan
-</button><div id="hasil"></div></div><script>
+</select>
 
-terusconst SUPABASE_URL = "https://yacmjyomakfdkmxeihbb.supabase.co/rest/v1/";
+<button onclick="buatUndangan()">
+Buat Undangan
+</button>
+
+<div id="hasil"></div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL = "https://yacmjyomakfdkmxeihbb.supabase.co";
 const SUPABASE_KEY = "sb_publishable_T67eRn0MhIBTZxOv07gyRA_e9kiK_Wo";
+
+async function buatUndangan(){
 
   const data = {
     nama_wanita: document.getElementById("nama_wanita").value,
@@ -103,11 +136,53 @@ const SUPABASE_KEY = "sb_publishable_T67eRn0MhIBTZxOv07gyRA_e9kiK_Wo";
     return;
   }
 
-  document.getElementById("hasil").style.display="block";
-  document.getElementById("hasil").innerHTML=
-    "Data sudah siap dibuat. Langkah berikutnya adalah menghubungkan formulir ini ke database Supabase.";
+  const hasil = document.getElementById("hasil");
+
+  hasil.style.display = "block";
+  hasil.innerHTML = "⏳ Menyimpan data...";
+
+  try {
+
+    const response = await fetch(
+      SUPABASE_URL + "/rest/v1/undangan",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY,
+          "Prefer": "return=minimal"
+        },
+
+        body: JSON.stringify(data)
+      }
+    );
+
+    if(!response.ok){
+
+      const errorText = await response.text();
+
+      throw new Error(errorText);
+    }
+
+    hasil.innerHTML =
+      "✅ Data berhasil disimpan!<br><br>" +
+      "Undangan siap dibuat.";
+
+  } catch(error){
+
+    console.error(error);
+
+    hasil.innerHTML =
+      "❌ Data gagal disimpan.<br><br>" +
+      "Periksa koneksi Supabase dan nama tabel.";
+
+  }
 
 }
 
-</script></body>
-  </html>
+</script>
+
+</body>
+</html>
