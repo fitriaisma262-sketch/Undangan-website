@@ -63,6 +63,8 @@
       background:#876f52;
       color:white;
       text-decoration:none;
+      border:none;
+      cursor:pointer;
     }
 
     section{
@@ -261,9 +263,8 @@
     modern dan mudah dibagikan.
   </p>  <a class="btn" href="#template">
     Lihat Template
-  </a></section><section id="template">  <div class="title"><h2>Pilih Template</h2>
-
-<p>
+  </a></section><section id="template">  <div class="title">
+    <h2>Pilih Template</h2><p>
   Temukan desain yang paling cocok untuk hari bahagiamu.
 </p>
 
@@ -295,6 +296,7 @@
 
 </div>
 
+
 <div class="template">
 
   <div class="preview classic">
@@ -323,6 +325,7 @@
 
 </div>
 
+
 <div class="template">
 
   <div class="preview emerald">
@@ -350,6 +353,7 @@
   </div>
 
 </div>
+
 
 <div class="template">
 
@@ -388,30 +392,37 @@
   </div>  <div class="features"><div class="feature">
   <span>💌</span>
   <h3>Nama Pengantin</h3>
+
   <p>
     Tampilkan nama pasangan dengan desain elegan.
   </p>
 </div>
 
+
 <div class="feature">
   <span>📅</span>
   <h3>Detail Acara</h3>
+
   <p>
     Tanggal, waktu dan lokasi acara dapat ditampilkan.
   </p>
 </div>
 
+
 <div class="feature">
   <span>💖</span>
   <h3>Love Story</h3>
+
   <p>
     Ceritakan perjalanan cinta kalian.
   </p>
 </div>
 
+
 <div class="feature">
   <span>📱</span>
   <h3>Mudah Dibagikan</h3>
+
   <p>
     Undangan dapat dibagikan melalui link.
   </p>
@@ -425,13 +436,32 @@
 
   </div>  <div class="form-box"><form id="undanganForm">
 
-  <label for="nama_pria">Nama Pria</label>
-  <input type="text" id="nama_pria" required>
+  <label for="nama_pria">
+    Nama Pria
+  </label>
 
-  <label for="nama_wanita">Nama Wanita</label>
-  <input type="text" id="nama_wanita" required>
+  <input
+    type="text"
+    id="nama_pria"
+    required
+  >
 
-  <label for="title">Judul Undangan</label>
+
+  <label for="nama_wanita">
+    Nama Wanita
+  </label>
+
+  <input
+    type="text"
+    id="nama_wanita"
+    required
+  >
+
+
+  <label for="title">
+    Judul Undangan
+  </label>
+
   <input
     type="text"
     id="title"
@@ -439,30 +469,68 @@
     required
   >
 
-  <label for="tanggal">Tanggal</label>
-  <input type="date" id="tanggal" required>
 
-  <label for="jam">Jam</label>
-  <input type="time" id="jam" required>
+  <label for="tanggal">
+    Tanggal
+  </label>
 
-  <label for="tempat">Tempat</label>
-  <input type="text" id="tempat" required>
-
-  <label for="musik">URL Musik</label>
   <input
-    type="text"
-    id="musik"
-    placeholder="https://..."
+    type="date"
+    id="tanggal"
+    required
   >
 
-  <label for="foto">URL Foto</label>
+
+  <label for="jam">
+    Jam
+  </label>
+
+  <input
+    type="time"
+    id="jam"
+    required
+  >
+
+
+  <label for="tempat">
+    Tempat
+  </label>
+
   <input
     type="text"
+    id="tempat"
+    required
+  >
+
+
+  <label for="foto">
+    📷 Foto Pengantin
+  </label>
+
+  <input
+    type="file"
     id="foto"
-    placeholder="https://..."
+    accept="image/*"
+    required
   >
 
-  <label for="status">Status</label>
+
+  <label for="musik">
+    🎵 Musik Undangan
+  </label>
+
+  <input
+    type="file"
+    id="musik"
+    accept="audio/*"
+    required
+  >
+
+
+  <label for="status">
+    Status
+  </label>
+
   <input
     type="text"
     id="status"
@@ -470,7 +538,11 @@
     required
   >
 
-  <label for="slug">Slug</label>
+
+  <label for="slug">
+    Slug
+  </label>
+
   <input
     type="text"
     id="slug"
@@ -478,16 +550,25 @@
     required
   >
 
-  <label for="wa">WhatsApp</label>
+
+  <label for="wa">
+    WhatsApp
+  </label>
+
   <input
     type="text"
     id="wa"
     placeholder="628xxxxxxxxxx"
   >
 
-  <button type="submit" id="submitBtn">
+
+  <button
+    type="submit"
+    id="submitBtn"
+  >
     💍 Buat Undangan
   </button>
+
 
   <p id="hasil"></p>
 
@@ -503,93 +584,287 @@ Undangan digital elegan untuk hari istimewa 🤎
 
 document.addEventListener("DOMContentLoaded", function(){
 
-  const form = document.getElementById("undanganForm");
-  const hasil = document.getElementById("hasil");
-  const submitBtn = document.getElementById("submitBtn");
+  const form =
+    document.getElementById("undanganForm");
+
+  const hasil =
+    document.getElementById("hasil");
+
+  const submitBtn =
+    document.getElementById("submitBtn");
+
 
   form.addEventListener("submit", async function(e){
 
     e.preventDefault();
 
-    hasil.textContent = "⏳ Sedang menyimpan...";
+
     submitBtn.disabled = true;
 
+    hasil.textContent =
+      "⏳ Sedang membuat undangan...";
+
+
     try{
+
 
       if(typeof supabase === "undefined"){
 
         hasil.textContent =
-          "❌ Supabase belum terhubung. Cek file supabase.js.";
+          "❌ Supabase belum terhubung. Cek supabase.js.";
 
         submitBtn.disabled = false;
-        return;
 
+        return;
       }
+
+
+      const fotoFile =
+        document.getElementById("foto").files[0];
+
+      const musikFile =
+        document.getElementById("musik").files[0];
+
+
+      if(!fotoFile){
+
+        hasil.textContent =
+          "❌ Silakan pilih foto.";
+
+        submitBtn.disabled = false;
+
+        return;
+      }
+
+
+      if(!musikFile){
+
+        hasil.textContent =
+          "❌ Silakan pilih musik.";
+
+        submitBtn.disabled = false;
+
+        return;
+      }
+
+
+      /*
+        UPLOAD FOTO
+      */
+
+      const fotoNama =
+        Date.now() +
+        "-" +
+        Math.random().toString(36).substring(2) +
+        "-" +
+        fotoFile.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+
+
+      const fotoPath =
+        "foto/" + fotoNama;
+
+
+      const fotoUpload =
+        await supabase.storage
+        .from("foto-undangan")
+        .upload(
+          fotoPath,
+          fotoFile,
+          {
+            contentType: fotoFile.type,
+            upsert: false
+          }
+        );
+
+
+      if(fotoUpload.error){
+
+        hasil.textContent =
+          "❌ Foto gagal diupload: " +
+          fotoUpload.error.message;
+
+        submitBtn.disabled = false;
+
+        return;
+      }
+
+
+      /*
+        AMBIL URL FOTO
+      */
+
+      const fotoUrl =
+        supabase.storage
+        .from("foto-undangan")
+        .getPublicUrl(fotoPath)
+        .data
+        .publicUrl;
+
+
+      /*
+        UPLOAD MUSIK
+      */
+
+      const musikNama =
+        Date.now() +
+        "-" +
+        Math.random().toString(36).substring(2) +
+        "-" +
+        musikFile.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+
+
+      const musikPath =
+        "musik/" + musikNama;
+
+
+      const musikUpload =
+        await supabase.storage
+        .from("foto-undangan")
+        .upload(
+          musikPath,
+          musikFile,
+          {
+            contentType: musikFile.type,
+            upsert: false
+          }
+        );
+
+
+      if(musikUpload.error){
+
+        hasil.textContent =
+          "❌ Musik gagal diupload: " +
+          musikUpload.error.message;
+
+        submitBtn.disabled = false;
+
+        return;
+      }
+
+
+      /*
+        AMBIL URL MUSIK
+      */
+
+      const musikUrl =
+        supabase.storage
+        .from("foto-undangan")
+        .getPublicUrl(musikPath)
+        .data
+        .publicUrl;
+
+
+      /*
+        DATA UNDANGAN
+      */
 
       const data = {
 
         nama_pria:
-          document.getElementById("nama_pria").value.trim(),
+          document
+          .getElementById("nama_pria")
+          .value
+          .trim(),
 
         nama_wanita:
-          document.getElementById("nama_wanita").value.trim(),
+          document
+          .getElementById("nama_wanita")
+          .value
+          .trim(),
 
         title:
-          document.getElementById("title").value.trim(),
+          document
+          .getElementById("title")
+          .value
+          .trim(),
 
         tanggal:
-          document.getElementById("tanggal").value,
+          document
+          .getElementById("tanggal")
+          .value,
 
         jam:
-          document.getElementById("jam").value,
+          document
+          .getElementById("jam")
+          .value,
 
         tempat:
-          document.getElementById("tempat").value.trim(),
+          document
+          .getElementById("tempat")
+          .value
+          .trim(),
 
         musik:
-          document.getElementById("musik").value.trim(),
+          musikUrl,
 
         foto:
-          document.getElementById("foto").value.trim(),
+          fotoUrl,
 
         status:
-          document.getElementById("status").value.trim(),
+          document
+          .getElementById("status")
+          .value
+          .trim(),
 
         slug:
-          document.getElementById("slug").value.trim(),
+          document
+          .getElementById("slug")
+          .value
+          .trim(),
 
         wa:
-          document.getElementById("wa").value.trim()
+          document
+          .getElementById("wa")
+          .value
+          .trim()
 
       };
 
-      const { error } = await supabase
+
+      /*
+        SIMPAN KE TABEL UNDANGAN
+      */
+
+      const result =
+        await supabase
         .from("UNDANGAN")
         .insert([data]);
 
-      if(error){
+
+      if(result.error){
 
         hasil.textContent =
-          "❌ Gagal menyimpan: " + error.message;
+          "❌ Data gagal disimpan: " +
+          result.error.message;
 
         submitBtn.disabled = false;
 
         return;
       }
+
+
+      /*
+        BERHASIL
+      */
 
       hasil.textContent =
         "✅ Undangan berhasil dibuat!";
 
       form.reset();
 
-      document.getElementById("status").value = "aktif";
+      document
+        .getElementById("status")
+        .value = "aktif";
+
 
       submitBtn.disabled = false;
+
 
     }catch(error){
 
       hasil.textContent =
-        "❌ Terjadi kesalahan: " + error.message;
+        "❌ Terjadi kesalahan: " +
+        error.message;
 
       submitBtn.disabled = false;
 
@@ -600,4 +875,4 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 </script></body>
-</html>
+  </html>
