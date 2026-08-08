@@ -1,677 +1,1073 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Fitria Invitation</title>
+<title>Fitria Invitation</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
 
-  <style>
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body{
-      font-family:Arial,sans-serif;
-      background:#faf7f2;
-      color:#493d34;
-    }
+body{
+  font-family:Arial,sans-serif;
+  background:#faf7f2;
+  color:#493d34;
+}
 
-    header{
-      padding:20px 7%;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:white;
-      position:sticky;
-      top:0;
-      z-index:10;
-    }
+header{
+  padding:20px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
 
-    .logo{
-      font-family:Georgia,serif;
-      font-size:24px;
-    }
+.logo{
+  font-family:Georgia,serif;
+  font-size:24px;
+}
 
-    nav a{
-      margin-left:15px;
-      text-decoration:none;
-      color:#493d34;
-    }
+nav a{
+  margin-left:15px;
+  text-decoration:none;
+  color:#493d34;
+}
 
-    .hero{
-      text-align:center;
-      padding:90px 20px;
-      background:#eee2d2;
-    }
+.hero{
+  text-align:center;
+  padding:90px 20px;
+  background:#eee2d2;
+}
 
-    .hero h1{
-      font-family:Georgia,serif;
-      font-size:48px;
-      font-weight:normal;
-      margin-bottom:15px;
-    }
+.hero h1{
+  font-family:Georgia,serif;
+  font-size:48px;
+  font-weight:normal;
+  margin-bottom:15px;
+}
 
-    .hero p{
-      max-width:550px;
-      margin:auto;
-      line-height:1.8;
-    }
+.hero p{
+  max-width:550px;
+  margin:auto;
+  line-height:1.8;
+}
 
-    .btn{
-      display:inline-block;
-      margin-top:25px;
-      padding:13px 25px;
-      border-radius:30px;
-      background:#876f52;
-      color:white;
-      text-decoration:none;
-    }
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:13px 25px;
+  border-radius:30px;
+  background:#876f52;
+  color:white;
+  text-decoration:none;
+}
 
-    section{
-      padding:70px 7%;
-    }
+section{
+  padding:70px 7%;
+}
 
-    .title{
-      text-align:center;
-      margin-bottom:40px;
-    }
+.title{
+  text-align:center;
+  margin-bottom:40px;
+}
 
-    .title h2{
-      font-family:Georgia,serif;
-      font-size:35px;
-      font-weight:normal;
-      margin-bottom:10px;
-    }
+.title h2{
+  font-family:Georgia,serif;
+  font-size:35px;
+  font-weight:normal;
+  margin-bottom:10px;
+}
 
-    .templates{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-      gap:25px;
-    }
+.templates{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:25px;
+}
 
-    .template{
-      background:white;
-      border-radius:18px;
-      overflow:hidden;
-      box-shadow:0 7px 25px rgba(0,0,0,.08);
-    }
+.template{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 7px 25px rgba(0,0,0,.08);
+}
 
-    .preview{
-      height:280px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:20px;
-    }
+.preview{
+  height:280px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
 
-    .floral{background:#eee0d0}
-    .classic{background:#e8dfd5}
-    .emerald{background:#dce8df}
-    .luxury{background:#e5dfd4}
+.floral{background:#eee0d0}
+.classic{background:#e8dfd5}
+.emerald{background:#dce8df}
+.luxury{background:#e5dfd4}
 
-    .preview p{
-      font-size:12px;
-      letter-spacing:2px;
-      margin-bottom:10px;
-    }
+.preview p{
+  font-size:12px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
 
-    .preview h3{
-      font-family:Georgia,serif;
-      font-size:30px;
-      font-weight:normal;
-    }
+.preview h3{
+  font-family:Georgia,serif;
+  font-size:30px;
+  font-weight:normal;
+}
 
-    .info{
-      padding:22px;
-    }
+.info{
+  padding:22px;
+}
 
-    .info h3{
-      margin-bottom:8px;
-    }
+.info h3{
+  margin-bottom:8px;
+}
 
-    .info p{
-      color:#777;
-      font-size:14px;
-      line-height:1.6;
-    }
+.info p{
+  color:#777;
+  font-size:14px;
+  line-height:1.6;
+}
 
-    .price{
-      font-size:22px;
-      font-weight:bold;
-      margin-top:15px;
-    }
+.price{
+  font-size:22px;
+  font-weight:bold;
+  margin-top:15px;
+}
 
-    .features{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-      gap:18px;
-    }
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:18px;
+}
 
-    .feature{
-      background:white;
-      padding:25px;
-      border-radius:16px;
-      text-align:center;
-    }
+.feature{
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  text-align:center;
+}
 
-    .feature span{
-      display:block;
-      font-size:30px;
-      margin-bottom:10px;
-    }
+.feature span{
+  display:block;
+  font-size:30px;
+  margin-bottom:10px;
+}
 
-    .feature p{
-      margin-top:8px;
-      color:#777;
-      font-size:14px;
-      line-height:1.5;
-    }
+.feature p{
+  margin-top:8px;
+  color:#777;
+  font-size:14px;
+  line-height:1.5;
+}
 
-    .order{
-      background:#eee2d2;
-    }
+.order{
+  background:#eee2d2;
+}
 
-    .form-box{
-      max-width:650px;
-      margin:auto;
-      background:white;
-      padding:30px;
-      border-radius:20px;
-      box-shadow:0 7px 25px rgba(0,0,0,.08);
-    }
+.form-box{
+  max-width:650px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 7px 25px rgba(0,0,0,.08);
+}
 
-    .form-box label{
-      display:block;
-      margin-top:15px;
-      margin-bottom:7px;
-      font-weight:bold;
-    }
+.form-box label{
+  display:block;
+  margin-top:15px;
+  margin-bottom:7px;
+  font-weight:bold;
+}
 
-    .form-box input{
-      width:100%;
-      padding:12px;
-      border:1px solid #ddd;
-      border-radius:10px;
-      font-size:15px;
-    }
+.form-box input{
+  width:100%;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:15px;
+}
 
-    .form-box button{
-      width:100%;
-      margin-top:25px;
-      padding:14px;
-      border:0;
-      border-radius:30px;
-      background:#876f52;
-      color:white;
-      font-size:16px;
-      cursor:pointer;
-    }
+.form-box button{
+  width:100%;
+  margin-top:25px;
+  padding:14px;
+  border:0;
+  border-radius:30px;
+  background:#876f52;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
 
-    .form-box button:disabled{
-      opacity:.6;
-    }
+.form-box button:disabled{
+  opacity:.6;
+}
 
-    #hasil{
-      margin-top:15px;
-      text-align:center;
-      font-weight:bold;
-      line-height:1.5;
-    }
+#hasil{
+  margin-top:15px;
+  text-align:center;
+  font-weight:bold;
+  line-height:1.5;
+}
 
-    footer{
-      padding:35px;
-      text-align:center;
-      background:#493d34;
-      color:white;
-    }
+footer{
+  padding:35px;
+  text-align:center;
+  background:#493d34;
+  color:white;
+}
 
-    @media(max-width:600px){
-      .hero h1{
-        font-size:38px;
-      }
+@media(max-width:600px){
 
-      nav a{
-        margin-left:8px;
-        font-size:13px;
-      }
+  .hero h1{
+    font-size:38px;
+  }
 
-      .form-box{
-        padding:20px;
-      }
-    }
-  </style>
+  nav a{
+    margin-left:8px;
+    font-size:13px;
+  }
+
+  .form-box{
+    padding:20px;
+  }
+
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">Fitria Invitation</div>
 
-  <nav>
-    <a href="#template">Template</a>
-    <a href="#fitur">Fitur</a>
-    <a href="#pesan">Pesan</a>
-  </nav>
+<div class="logo">
+Fitria Invitation
+</div>
+
+<nav>
+<a href="#template">Template</a>
+<a href="#fitur">Fitur</a>
+<a href="#pesan">Pesan</a>
+</nav>
+
 </header>
 
+
 <section class="hero">
-  <h1>Undangan Digital</h1>
 
-  <p>
-    Buat hari istimewa semakin berkesan
-    dengan undangan digital yang elegan,
-    modern dan mudah dibagikan.
-  </p>
+<h1>Undangan Digital</h1>
 
-  <a class="btn" href="#template">Lihat Template</a>
+<p>
+Buat hari istimewa semakin berkesan
+dengan undangan digital yang elegan,
+modern dan mudah dibagikan.
+</p>
+
+<a class="btn" href="#template">
+Lihat Template
+</a>
+
 </section>
+
 
 <section id="template">
-  <div class="title">
-    <h2>Pilih Template</h2>
-    <p>Temukan desain yang paling cocok untuk hari bahagiamu.</p>
-  </div>
 
-  <div class="templates">
+<div class="title">
 
-    <div class="template">
-      <div class="preview floral">
-        <div>
-          <p>THE WEDDING OF</p>
-          <h3>Fitria<br>&<br>Pasangan</h3>
-        </div>
-      </div>
+<h2>Pilih Template</h2>
 
-      <div class="info">
-        <h3>🌸 Floral</h3>
-        <p>Desain lembut dan romantis dengan nuansa bunga.</p>
-        <div class="price">Rp69.000</div>
-      </div>
-    </div>
+<p>
+Temukan desain yang paling cocok untuk hari bahagiamu.
+</p>
 
-    <div class="template">
-      <div class="preview classic">
-        <div>
-          <p>THE WEDDING OF</p>
-          <h3>Fitria<br>&<br>Pasangan</h3>
-        </div>
-      </div>
+</div>
 
-      <div class="info">
-        <h3>🤎 Classic</h3>
-        <p>Desain sederhana, elegan dan timeless.</p>
-        <div class="price">Rp88.000</div>
-      </div>
-    </div>
 
-    <div class="template">
-      <div class="preview emerald">
-        <div>
-          <p>THE WEDDING OF</p>
-          <h3>Fitria<br>&<br>Pasangan</h3>
-        </div>
-      </div>
+<div class="templates">
 
-      <div class="info">
-        <h3>💚 Emerald</h3>
-        <p>Nuansa hijau elegan untuk tampilan yang mewah.</p>
-        <div class="price">Rp100.000</div>
-      </div>
-    </div>
 
-    <div class="template">
-      <div class="preview luxury">
-        <div>
-          <p>THE WEDDING OF</p>
-          <h3>Fitria<br>&<br>Pasangan</h3>
-        </div>
-      </div>
+<div class="template">
 
-      <div class="info">
-        <h3>✨ Luxury</h3>
-        <p>Tampilan mewah dan elegan untuk hari spesial.</p>
-        <div class="price">Rp150.000</div>
-      </div>
-    </div>
+<div class="preview floral">
 
-  </div>
+<div>
+
+<p>THE WEDDING OF</p>
+
+<h3>
+Fitria
+<br>&<br>
+Pasangan
+</h3>
+
+</div>
+
+</div>
+
+<div class="info">
+
+<h3>🌸 Floral</h3>
+
+<p>
+Desain lembut dan romantis dengan nuansa bunga.
+</p>
+
+<div class="price">
+Rp69.000
+</div>
+
+</div>
+
+</div>
+
+
+<div class="template">
+
+<div class="preview classic">
+
+<div>
+
+<p>THE WEDDING OF</p>
+
+<h3>
+Fitria
+<br>&<br>
+Pasangan
+</h3>
+
+</div>
+
+</div>
+
+<div class="info">
+
+<h3>🤎 Classic</h3>
+
+<p>
+Desain sederhana, elegan dan timeless.
+</p>
+
+<div class="price">
+Rp88.000
+</div>
+
+</div>
+
+</div>
+
+
+<div class="template">
+
+<div class="preview emerald">
+
+<div>
+
+<p>THE WEDDING OF</p>
+
+<h3>
+Fitria
+<br>&<br>
+Pasangan
+</h3>
+
+</div>
+
+</div>
+
+<div class="info">
+
+<h3>💚 Emerald</h3>
+
+<p>
+Nuansa hijau elegan untuk tampilan yang mewah.
+</p>
+
+<div class="price">
+Rp100.000
+</div>
+
+</div>
+
+</div>
+
+
+<div class="template">
+
+<div class="preview luxury">
+
+<div>
+
+<p>THE WEDDING OF</p>
+
+<h3>
+Fitria
+<br>&<br>
+Pasangan
+</h3>
+
+</div>
+
+</div>
+
+<div class="info">
+
+<h3>✨ Luxury</h3>
+
+<p>
+Tampilan mewah dan elegan untuk hari spesial.
+</p>
+
+<div class="price">
+Rp150.000
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
 </section>
+
 
 <section id="fitur">
-  <div class="title">
-    <h2>Fitur Undangan</h2>
-    <p>Semua yang dibutuhkan untuk undangan digitalmu.</p>
-  </div>
 
-  <div class="features">
+<div class="title">
 
-    <div class="feature">
-      <span>💌</span>
-      <h3>Nama Pengantin</h3>
-      <p>Tampilkan nama pasangan dengan desain elegan.</p>
-    </div>
+<h2>Fitur Undangan</h2>
 
-    <div class="feature">
-      <span>📅</span>
-      <h3>Detail Acara</h3>
-      <p>Tanggal, waktu dan lokasi acara dapat ditampilkan.</p>
-    </div>
+<p>
+Semua yang dibutuhkan untuk undangan digitalmu.
+</p>
 
-    <div class="feature">
-      <span>💖</span>
-      <h3>Love Story</h3>
-      <p>Ceritakan perjalanan cinta kalian.</p>
-    </div>
+</div>
 
-    <div class="feature">
-      <span>📱</span>
-      <h3>Mudah Dibagikan</h3>
-      <p>Undangan dapat dibagikan melalui link.</p>
-    </div>
 
-  </div>
+<div class="features">
+
+
+<div class="feature">
+
+<span>💌</span>
+
+<h3>Nama Pengantin</h3>
+
+<p>
+Tampilkan nama pasangan dengan desain elegan.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<span>📅</span>
+
+<h3>Detail Acara</h3>
+
+<p>
+Tanggal, waktu dan lokasi acara dapat ditampilkan.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<span>💖</span>
+
+<h3>Love Story</h3>
+
+<p>
+Ceritakan perjalanan cinta kalian.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<span>📱</span>
+
+<h3>Mudah Dibagikan</h3>
+
+<p>
+Undangan dapat dibagikan melalui link.
+</p>
+
+</div>
+
+
+</div>
+
 </section>
+
 
 <section class="order" id="pesan">
 
-  <div class="title">
-    <h2>Pesan Undangan</h2>
-    <p>Isi data pasanganmu untuk mulai membuat undangan digital.</p>
-  </div>
+<div class="title">
 
-  <div class="form-box">
+<h2>Pesan Undangan</h2>
 
-    <form id="undanganForm">
+<p>
+Isi data pasanganmu untuk mulai membuat undangan digital.
+</p>
 
-      <label>Nama Pria</label>
-      <input type="text" id="nama_pria" required>
+</div>
 
-      <label>Nama Wanita</label>
-      <input type="text" id="nama_wanita" required>
 
-      <label>Judul Undangan</label>
-      <input
-        type="text"
-        id="title"
-        placeholder="Pernikahan Andi & Sari"
-        required
-      >
+<div class="form-box">
 
-      <label>📅 Tanggal Acara</label>
-      <input type="date" id="tanggal_acara" required>
+<form id="undanganForm">
 
-      <label>⏰ Jam Acara</label>
-      <input type="time" id="jam" required>
 
-      <label>📍 Tempat Acara</label>
-      <input type="text" id="tempat" required>
+<label for="nama_pria">
+Nama Pria
+</label>
 
-      <label>📷 Foto Pengantin</label>
-      <input type="file" id="foto" accept="image/*" required>
+<input
+type="text"
+id="nama_pria"
+required
+>
 
-      <label>🎵 Musik Undangan</label>
-      <input type="file" id="musik" accept="audio/*" required>
 
-      <label>Status</label>
-      <input type="text" id="status" value="aktif" required>
+<label for="nama_wanita">
+Nama Wanita
+</label>
 
-      <label>Slug</label>
-      <input
-        type="text"
-        id="slug"
-        placeholder="andi-sari"
-        required
-      >
+<input
+type="text"
+id="nama_wanita"
+required
+>
 
-      <label>WhatsApp</label>
-      <input
-        type="text"
-        id="wa"
-        placeholder="628xxxxxxxxxx"
-      >
 
-      <button type="submit" id="submitBtn">
-        💍 Buat Undangan
-      </button>
+<label for="title">
+Judul Undangan
+</label>
 
-      <p id="hasil"></p>
+<input
+type="text"
+id="title"
+placeholder="Pernikahan Andi & Sari"
+required
+>
 
-    </form>
 
-  </div>
+<label for="tanggal_acara">
+📅 Tanggal Acara
+</label>
+
+<input
+type="date"
+id="tanggal_acara"
+required
+>
+
+
+<label for="jam_acara">
+⏰ Jam Acara
+</label>
+
+<input
+type="time"
+id="jam_acara"
+required
+>
+
+
+<label for="tempat">
+📍 Tempat Acara
+</label>
+
+<input
+type="text"
+id="tempat"
+required
+>
+
+
+<label for="foto">
+📷 Foto Pengantin
+</label>
+
+<input
+type="file"
+id="foto"
+accept="image/*"
+required
+>
+
+
+<label for="musik">
+🎵 Musik Undangan
+</label>
+
+<input
+type="file"
+id="musik"
+accept="audio/*"
+required
+>
+
+
+<label for="status">
+Status
+</label>
+
+<input
+type="text"
+id="status"
+value="aktif"
+required
+>
+
+
+<label for="slug">
+Slug
+</label>
+
+<input
+type="text"
+id="slug"
+placeholder="andi-sari"
+required
+>
+
+
+<label for="wa">
+WhatsApp
+</label>
+
+<input
+type="text"
+id="wa"
+placeholder="628xxxxxxxxxx"
+>
+
+
+<button
+type="submit"
+id="submitBtn"
+>
+💍 Buat Undangan
+</button>
+
+
+<p id="hasil"></p>
+
+</form>
+
+</div>
+
 </section>
 
+
 <footer>
-  Fitria Invitation
-  <br><br>
-  Undangan digital elegan untuk hari istimewa 🤎
+
+Fitria Invitation
+
+<br><br>
+
+Undangan digital elegan untuk hari istimewa 🤎
+
 </footer>
 
+
 <script>
-document.addEventListener("DOMContentLoaded", function(){
 
-  const form = document.getElementById("undanganForm");
-  const hasil = document.getElementById("hasil");
-  const submitBtn = document.getElementById("submitBtn");
+document.addEventListener(
+"DOMContentLoaded",
+function(){
 
-  form.addEventListener("submit", async function(e){
+const form =
+document.getElementById("undanganForm");
 
-    e.preventDefault();
+const hasil =
+document.getElementById("hasil");
 
-    submitBtn.disabled = true;
-    hasil.textContent = "⏳ Sedang membuat undangan...";
+const submitBtn =
+document.getElementById("submitBtn");
 
-    try {
 
-      if (
-        typeof supabaseClient === "undefined" ||
-        !supabaseClient
-      ) {
-        throw new Error("Supabase belum terhubung.");
-      }
+form.addEventListener(
+"submit",
+async function(e){
 
-      const namaPria =
-        document.getElementById("nama_pria").value.trim();
+e.preventDefault();
 
-      const namaWanita =
-        document.getElementById("nama_wanita").value.trim();
+submitBtn.disabled = true;
 
-      const judul =
-        document.getElementById("title").value.trim();
+hasil.textContent =
+"⏳ Sedang membuat undangan...";
 
-      const tanggalAcara =
-        document.getElementById("tanggal_acara").value;
 
-      const jam =
-        document.getElementById("jam").value;
+try{
 
-      const tempat =
-        document.getElementById("tempat").value.trim();
 
-      const status =
-        document.getElementById("status").value.trim();
+if(
+typeof supabaseClient === "undefined" ||
+!supabaseClient
+){
 
-      const slug =
-        document.getElementById("slug").value.trim();
+throw new Error(
+"Supabase belum terhubung."
+);
 
-      const wa =
-        document.getElementById("wa").value.trim();
+}
 
-      const fotoFile =
-        document.getElementById("foto").files[0];
 
-      const musikFile =
-        document.getElementById("musik").files[0];
+/* AMBIL DATA */
 
-      /* CEK DATA */
+const namaPria =
+document
+.getElementById("nama_pria")
+.value
+.trim();
 
-      if (!namaPria || !namaWanita || !judul) {
-        throw new Error("Nama dan judul undangan wajib diisi.");
-      }
 
-      if (!tanggalAcara) {
-        throw new Error("Tanggal acara belum dipilih.");
-      }
+const namaWanita =
+document
+.getElementById("nama_wanita")
+.value
+.trim();
 
-      if (!jam) {
-        throw new Error("Jam acara belum dipilih.");
-      }
 
-      if (!tempat) {
-        throw new Error("Tempat acara belum diisi.");
-      }
+const judul =
+document
+.getElementById("title")
+.value
+.trim();
 
-      if (!fotoFile) {
-        throw new Error("Foto belum dipilih.");
-      }
 
-      if (!musikFile) {
-        throw new Error("Musik belum dipilih.");
-      }
+const tanggalAcara =
+document
+.getElementById("tanggal_acara")
+.value;
 
-      /* UPLOAD FOTO */
 
-      const fotoNama =
-        Date.now() +
-        "-" +
-        Math.random().toString(36).substring(2) +
-        "-" +
-        fotoFile.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+const jamAcara =
+document
+.getElementById("jam_acara")
+.value;
 
-      const fotoPath = "foto/" + fotoNama;
 
-      const fotoUpload =
-        await supabaseClient.storage
-          .from("foto-undangan")
-          .upload(
-            fotoPath,
-            fotoFile,
-            {
-              contentType: fotoFile.type,
-              upsert: false
-            }
-          );
+const tempat =
+document
+.getElementById("tempat")
+.value
+.trim();
 
-      if (fotoUpload.error) {
-        throw new Error(
-          "Foto gagal diupload: " +
-          fotoUpload.error.message
-        );
-      }
 
-      const fotoUrl =
-        supabaseClient.storage
-          .from("foto-undangan")
-          .getPublicUrl(fotoPath)
-          .data.publicUrl;
+const status =
+document
+.getElementById("status")
+.value
+.trim();
 
-      /* UPLOAD MUSIK */
 
-      const musikNama =
-        Date.now() +
-        "-" +
-        Math.random().toString(36).substring(2) +
-        "-" +
-        musikFile.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+const slug =
+document
+.getElementById("slug")
+.value
+.trim();
 
-      const musikPath = "musik/" + musikNama;
 
-      const musikUpload =
-        await supabaseClient.storage
-          .from("foto-undangan")
-          .upload(
-            musikPath,
-            musikFile,
-            {
-              contentType: musikFile.type,
-              upsert: false
-            }
-          );
+const wa =
+document
+.getElementById("wa")
+.value
+.trim();
 
-      if (musikUpload.error) {
-        throw new Error(
-          "Musik gagal diupload: " +
-          musikUpload.error.message
-        );
-      }
 
-      const musikUrl =
-        supabaseClient.storage
-          .from("foto-undangan")
-          .getPublicUrl(musikPath)
-          .data.publicUrl;
+const fotoFile =
+document
+.getElementById("foto")
+.files[0];
 
-      /* DATA YANG DIKIRIM */
 
-      const data = {
-        nama_pria: namaPria,
-        nama_wanita: namaWanita,
-        title: judul,
+const musikFile =
+document
+.getElementById("musik")
+.files[0];
 
-        /* INI KOLOM DATABASE YANG WAJIB ADA */
-        tanggal_acara: tanggalAcara,
 
-        jam: jam,
-        tempat: tempat,
-        foto: fotoUrl,
-        musik: musikUrl,
-        status: status,
-        slug: slug,
-        wa: wa
-      };
+/* CEK */
 
-      /* PASTIKAN TANGGAL TIDAK NULL */
+if(!namaPria)
+throw new Error("Nama pria belum diisi.");
 
-      if (!data.tanggal_acara) {
-        throw new Error(
-          "Tanggal acara kosong. Silakan pilih tanggal."
-        );
-      }
 
-      /* SIMPAN */
+if(!namaWanita)
+throw new Error("Nama wanita belum diisi.");
 
-      const result =
-        await supabaseClient
-          .from("UNDANGAN")
-          .insert([data]);
 
-      if (result.error) {
-        throw new Error(
-          "Data gagal disimpan: " +
-          result.error.message
-        );
-      }
+if(!judul)
+throw new Error("Judul undangan belum diisi.");
 
-      hasil.textContent =
-        "✅ Undangan berhasil dibuat!";
 
-      form.reset();
+if(!tanggalAcara)
+throw new Error("Tanggal acara belum dipilih.");
 
-      document.getElementById("status").value =
-        "aktif";
 
-    } catch(error) {
+if(!jamAcara)
+throw new Error("Jam acara belum dipilih.");
 
-      hasil.textContent =
-        "❌ " + error.message;
 
-    } finally {
+if(!tempat)
+throw new Error("Tempat acara belum diisi.");
 
-      submitBtn.disabled = false;
 
-    }
+if(!fotoFile)
+throw new Error("Foto belum dipilih.");
 
-  });
+
+if(!musikFile)
+throw new Error("Musik belum dipilih.");
+
+
+/* FOTO */
+
+const fotoNama =
+Date.now() +
+"-" +
+Math.random()
+.toString(36)
+.substring(2) +
+"-" +
+fotoFile.name
+.replace(
+/[^a-zA-Z0-9._-]/g,
+"-"
+);
+
+
+const fotoPath =
+"foto/" + fotoNama;
+
+
+const fotoUpload =
+await supabaseClient
+.storage
+.from("foto-undangan")
+.upload(
+fotoPath,
+fotoFile,
+{
+contentType:
+fotoFile.type,
+upsert:false
+}
+);
+
+
+if(fotoUpload.error){
+
+throw new Error(
+"Foto gagal diupload: " +
+fotoUpload.error.message
+);
+
+}
+
+
+const fotoUrl =
+supabaseClient
+.storage
+.from("foto-undangan")
+.getPublicUrl(
+fotoPath
+)
+.data
+.publicUrl;
+
+
+/* MUSIK */
+
+const musikNama =
+Date.now() +
+"-" +
+Math.random()
+.toString(36)
+.substring(2) +
+"-" +
+musikFile.name
+.replace(
+/[^a-zA-Z0-9._-]/g,
+"-"
+);
+
+
+const musikPath =
+"musik/" + musikNama;
+
+
+const musikUpload =
+await supabaseClient
+.storage
+.from("foto-undangan")
+.upload(
+musikPath,
+musikFile,
+{
+contentType:
+musikFile.type,
+upsert:false
+}
+);
+
+
+if(musikUpload.error){
+
+throw new Error(
+"Musik gagal diupload: " +
+musikUpload.error.message
+);
+
+}
+
+
+const musikUrl =
+supabaseClient
+.storage
+.from("foto-undangan")
+.getPublicUrl(
+musikPath
+)
+.data
+.publicUrl;
+
+
+/* DATA DATABASE */
+
+const data = {
+
+nama_pria:
+namaPria,
+
+nama_wanita:
+namaWanita,
+
+title:
+judul,
+
+tanggal_acara:
+tanggalAcara,
+
+jam_acara:
+jamAcara,
+
+tempat:
+tempat,
+
+foto:
+fotoUrl,
+
+musik:
+musikUrl,
+
+status:
+status,
+
+slug:
+slug,
+
+wa:
+wa
+
+};
+
+
+/* PASTIKAN TANGGAL DAN JAM ADA */
+
+if(!data.tanggal_acara){
+
+throw new Error(
+"Tanggal acara kosong."
+);
+
+}
+
+
+if(!data.jam_acara){
+
+throw new Error(
+"Jam acara kosong."
+);
+
+}
+
+
+/* SIMPAN */
+
+const result =
+await supabaseClient
+.from("UNDANGAN")
+.insert([data]);
+
+
+if(result.error){
+
+throw new Error(
+"Data gagal disimpan: " +
+result.error.message
+);
+
+}
+
+
+/* BERHASIL */
+
+hasil.textContent =
+"✅ Undangan berhasil dibuat!";
+
+form.reset();
+
+document
+.getElementById("status")
+.value =
+"aktif";
+
+
+}
+
+catch(error){
+
+hasil.textContent =
+"❌ " +
+error.message;
+
+}
+
+finally{
+
+submitBtn.disabled =
+false;
+
+}
 
 });
+
+});
+
 </script>
 
 </body>
-</html>
+  </html>
