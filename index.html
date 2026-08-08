@@ -504,6 +504,25 @@ Fitria Invitation
 Undangan digital elegan untuk hari istimewa 🤎
 
 </footer>
+<script>
+document.getElementById("undanganForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
 
+  const title = document.getElementById("title").value;
+  const hasil = document.getElementById("hasil");
+
+  const { error } = await supabase
+    .from("UNDANGAN")
+    .insert([{ title: title }]);
+
+  if (error) {
+    hasil.textContent = "Gagal menyimpan: " + error.message;
+    return;
+  }
+
+  hasil.textContent = "Undangan berhasil disimpan!";
+  this.reset();
+});
+</script>
 </body>
 </html>
