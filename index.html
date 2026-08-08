@@ -487,12 +487,44 @@ Isi data pasanganmu untuk mulai membuat undangan digital.
 <section>
   <h2>Pesan Undangan</h2>
 
-  <form id="undanganForm">
-    <label>Judul Undangan</label>
-    <input type="text" id="title" placeholder="Contoh: Andi & Sari" required>
+<form id="undanganForm">
+  <label>Nama Pria</label>
+  <input type="text" id="nama_pria" required>
 
-    <button type="submit">Simpan</button>
-  </form>
+  <label>Nama Wanita</label>
+  <input type="text" id="nama_wanita" required>
+
+  <label>Judul Undangan</label>
+  <input type="text" id="title" placeholder="Pernikahan Andi & Sari" required>
+
+  <label>Tanggal</label>
+  <input type="date" id="tanggal" required>
+
+  <label>Jam</label>
+  <input type="time" id="jam" required>
+
+  <label>Tempat</label>
+  <input type="text" id="tempat" required>
+
+  <label>Musik</label>
+  <input type="text" id="musik">
+
+  <label>Foto</label>
+  <input type="text" id="foto">
+
+  <label>Status</label>
+  <input type="text" id="status" value="aktif">
+
+  <label>Slug</label>
+  <input type="text" id="slug" placeholder="andi-sari" required>
+
+  <label>WhatsApp</label>
+  <input type="text" id="wa" placeholder="628xxxxxxxxxx">
+
+  <button type="submit">Simpan Undangan</button>
+
+  <p id="hasil"></p>
+</form>
 
   <p id="hasil"></p>
 </section>
@@ -505,15 +537,29 @@ Undangan digital elegan untuk hari istimewa 🤎
 
 </footer>
 <script>
+<script>
 document.getElementById("undanganForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  const title = document.getElementById("title").value;
+  const data = {
+    nama_pria: document.getElementById("nama_pria").value,
+    nama_wanita: document.getElementById("nama_wanita").value,
+    title: document.getElementById("title").value,
+    tanggal: document.getElementById("tanggal").value,
+    jam: document.getElementById("jam").value,
+    tempat: document.getElementById("tempat").value,
+    musik: document.getElementById("musik").value,
+    foto: document.getElementById("foto").value,
+    status: document.getElementById("status").value,
+    slug: document.getElementById("slug").value,
+    wa: document.getElementById("wa").value
+  };
+
   const hasil = document.getElementById("hasil");
 
   const { error } = await supabase
     .from("UNDANGAN")
-    .insert([{ title: title }]);
+    .insert([data]);
 
   if (error) {
     hasil.textContent = "Gagal menyimpan: " + error.message;
