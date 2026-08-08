@@ -1,8 +1,7 @@
 <!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fitria Invitation</title>  <!-- Supabase -->  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <script src="supabase.js"></script>  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Fitria Invitation</title>  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <script src="supabase.js"></script>  <style>
     *{
       box-sizing:border-box;
       margin:0;
@@ -64,8 +63,6 @@
       background:#876f52;
       color:white;
       text-decoration:none;
-      border:none;
-      cursor:pointer;
     }
 
     section{
@@ -184,10 +181,6 @@
       background:#eee2d2;
     }
 
-    .order p{
-      margin-top:10px;
-    }
-
     .form-box{
       max-width:650px;
       margin:0 auto;
@@ -224,10 +217,15 @@
       cursor:pointer;
     }
 
+    .form-box button:disabled{
+      opacity:.6;
+    }
+
     #hasil{
       margin-top:15px;
       text-align:center;
       font-weight:bold;
+      line-height:1.5;
     }
 
     footer{
@@ -236,41 +234,56 @@
       background:#493d34;
       color:white;
     }
-  </style></head><body><header>
-  <div class="logo">
+
+    @media(max-width:600px){
+      .hero h1{
+        font-size:38px;
+      }
+
+      nav a{
+        margin-left:8px;
+        font-size:13px;
+      }
+
+      .form-box{
+        padding:20px;
+      }
+    }
+  </style></head><body><header>  <div class="logo">
     Fitria Invitation
   </div>  <nav>
     <a href="#template">Template</a>
     <a href="#fitur">Fitur</a>
     <a href="#pesan">Pesan</a>
-  </nav>
-</header><section class="hero">
-  <h1>Undangan Digital</h1>  <p>
+  </nav></header><section class="hero">  <h1>Undangan Digital</h1>  <p>
     Buat hari istimewa semakin berkesan
     dengan undangan digital yang elegan,
     modern dan mudah dibagikan.
   </p>  <a class="btn" href="#template">
     Lihat Template
-  </a>
-</section><section id="template">  <div class="title">
-    <h2>Pilih Template</h2><p>
+  </a></section><section id="template">  <div class="title"><h2>Pilih Template</h2>
+
+<p>
   Temukan desain yang paling cocok untuk hari bahagiamu.
 </p>
 
   </div>  <div class="templates"><div class="template">
+
   <div class="preview floral">
     <div>
       <p>THE WEDDING OF</p>
+
       <h3>
         Fitria
-        <br>&
-        <br>Pasangan
+        <br>&<br>
+        Pasangan
       </h3>
     </div>
   </div>
 
   <div class="info">
     <h3>🌸 Floral</h3>
+
     <p>
       Desain lembut dan romantis dengan nuansa bunga.
     </p>
@@ -279,22 +292,26 @@
       Rp69.000
     </div>
   </div>
+
 </div>
 
 <div class="template">
+
   <div class="preview classic">
     <div>
       <p>THE WEDDING OF</p>
+
       <h3>
         Fitria
-        <br>&
-        <br>Pasangan
+        <br>&<br>
+        Pasangan
       </h3>
     </div>
   </div>
 
   <div class="info">
     <h3>🤎 Classic</h3>
+
     <p>
       Desain sederhana, elegan dan timeless.
     </p>
@@ -303,22 +320,26 @@
       Rp88.000
     </div>
   </div>
+
 </div>
 
 <div class="template">
+
   <div class="preview emerald">
     <div>
       <p>THE WEDDING OF</p>
+
       <h3>
         Fitria
-        <br>&
-        <br>Pasangan
+        <br>&<br>
+        Pasangan
       </h3>
     </div>
   </div>
 
   <div class="info">
     <h3>💚 Emerald</h3>
+
     <p>
       Nuansa hijau elegan untuk tampilan yang mewah.
     </p>
@@ -327,22 +348,26 @@
       Rp100.000
     </div>
   </div>
+
 </div>
 
 <div class="template">
+
   <div class="preview luxury">
     <div>
       <p>THE WEDDING OF</p>
+
       <h3>
         Fitria
-        <br>&
-        <br>Pasangan
+        <br>&<br>
+        Pasangan
       </h3>
     </div>
   </div>
 
   <div class="info">
     <h3>✨ Luxury</h3>
+
     <p>
       Tampilan mewah dan elegan untuk hari spesial.
     </p>
@@ -351,11 +376,12 @@
       Rp150.000
     </div>
   </div>
+
 </div>
 
-  </div>
-</section><section id="fitur">  <div class="title">
-    <h2>Fitur Undangan</h2><p>
+  </div></section><section id="fitur">  <div class="title"><h2>Fitur Undangan</h2>
+
+<p>
   Semua yang dibutuhkan untuk undangan digitalmu.
 </p>
 
@@ -391,9 +417,9 @@
   </p>
 </div>
 
-  </div>
-</section><section class="order" id="pesan">  <div class="title">
-    <h2>Pesan Undangan</h2><p>
+  </div></section><section class="order" id="pesan">  <div class="title"><h2>Pesan Undangan</h2>
+
+<p>
   Isi data pasanganmu untuk mulai membuat undangan digital.
 </p>
 
@@ -459,7 +485,7 @@
     placeholder="628xxxxxxxxxx"
   >
 
-  <button type="submit">
+  <button type="submit" id="submitBtn">
     💍 Buat Undangan
   </button>
 
@@ -467,65 +493,111 @@
 
 </form>
 
-  </div></section><footer>
-  Fitria Invitation
-  <br><br>
-  Undangan digital elegan untuk hari istimewa 🤎
+  </div></section><footer>Fitria Invitation
+
+<br><br>
+
+Undangan digital elegan untuk hari istimewa 🤎
+
 </footer><script>
-document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", function(){
 
   const form = document.getElementById("undanganForm");
   const hasil = document.getElementById("hasil");
+  const submitBtn = document.getElementById("submitBtn");
 
-  if (!form) {
-    return;
-  }
-
-  form.addEventListener("submit", async function(e) {
+  form.addEventListener("submit", async function(e){
 
     e.preventDefault();
 
-    hasil.textContent = "Sedang menyimpan...";
+    hasil.textContent = "⏳ Sedang menyimpan...";
+    submitBtn.disabled = true;
 
-    try {
+    try{
+
+      if(typeof supabase === "undefined"){
+
+        hasil.textContent =
+          "❌ Supabase belum terhubung. Cek file supabase.js.";
+
+        submitBtn.disabled = false;
+        return;
+
+      }
 
       const data = {
-        nama_pria: document.getElementById("nama_pria").value.trim(),
-        nama_wanita: document.getElementById("nama_wanita").value.trim(),
-        title: document.getElementById("title").value.trim(),
-        tanggal: document.getElementById("tanggal").value,
-        jam: document.getElementById("jam").value,
-        tempat: document.getElementById("tempat").value.trim(),
-        musik: document.getElementById("musik").value.trim(),
-        foto: document.getElementById("foto").value.trim(),
-        status: document.getElementById("status").value.trim(),
-        slug: document.getElementById("slug").value.trim(),
-        wa: document.getElementById("wa").value.trim()
+
+        nama_pria:
+          document.getElementById("nama_pria").value.trim(),
+
+        nama_wanita:
+          document.getElementById("nama_wanita").value.trim(),
+
+        title:
+          document.getElementById("title").value.trim(),
+
+        tanggal:
+          document.getElementById("tanggal").value,
+
+        jam:
+          document.getElementById("jam").value,
+
+        tempat:
+          document.getElementById("tempat").value.trim(),
+
+        musik:
+          document.getElementById("musik").value.trim(),
+
+        foto:
+          document.getElementById("foto").value.trim(),
+
+        status:
+          document.getElementById("status").value.trim(),
+
+        slug:
+          document.getElementById("slug").value.trim(),
+
+        wa:
+          document.getElementById("wa").value.trim()
+
       };
 
       const { error } = await supabase
         .from("UNDANGAN")
         .insert([data]);
 
-      if (error) {
-        hasil.textContent = "Gagal menyimpan: " + error.message;
+      if(error){
+
+        hasil.textContent =
+          "❌ Gagal menyimpan: " + error.message;
+
+        submitBtn.disabled = false;
+
         return;
       }
 
-      hasil.textContent = "✅ Undangan berhasil dibuat!";
+      hasil.textContent =
+        "✅ Undangan berhasil dibuat!";
 
       form.reset();
 
       document.getElementById("status").value = "aktif";
 
-    } catch (error) {
+      submitBtn.disabled = false;
 
-      hasil.textContent = "Terjadi kesalahan: " + error.message;
+    }catch(error){
+
+      hasil.textContent =
+        "❌ Terjadi kesalahan: " + error.message;
+
+      submitBtn.disabled = false;
 
     }
 
   });
 
 });
+
 </script></body>
 </html>
