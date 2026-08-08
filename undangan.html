@@ -1,92 +1,117 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
 <title>Undangan Pernikahan</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="supabase.js"></script>
 
+
 <style>
+
+*{
+box-sizing:border-box;
+}
+
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#faf7f2;
-  color:#493d34;
+margin:0;
+font-family:Arial,sans-serif;
+background:#faf7f2;
+color:#493d34;
 }
 
 .container{
-  max-width:700px;
-  margin:auto;
-  text-align:center;
-  padding:40px 20px;
+max-width:700px;
+margin:auto;
+padding:40px 20px;
 }
 
 .card{
-  background:white;
-  padding:30px 20px;
-  border-radius:20px;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
+background:white;
+padding:30px 20px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+text-align:center;
 }
 
-img{
-  width:100%;
-  max-height:450px;
-  object-fit:cover;
-  border-radius:15px;
-  margin:20px 0;
+.card>p:first-child{
+letter-spacing:3px;
+font-size:12px;
 }
 
 h1{
-  font-family:Georgia,serif;
-  font-size:40px;
-  font-weight:normal;
+font-family:Georgia,serif;
+font-size:42px;
+font-weight:normal;
+line-height:1.3;
 }
 
 h2{
-  font-family:Georgia,serif;
-  font-weight:normal;
+font-family:Georgia,serif;
+font-weight:normal;
+}
+
+img{
+width:100%;
+max-height:450px;
+object-fit:cover;
+border-radius:15px;
+margin:20px 0;
 }
 
 .info{
-  margin:25px 0;
-  line-height:1.8;
+margin:30px 0;
+line-height:1.8;
 }
 
 .story{
-  text-align:left;
-  line-height:1.8;
-  white-space:pre-line;
+margin-top:30px;
+padding-top:25px;
+border-top:1px solid #eee;
+text-align:left;
+line-height:1.8;
 }
 
 .rekening{
-  background:#eee2d2;
-  padding:20px;
-  border-radius:15px;
-  margin-top:25px;
+background:#eee2d2;
+padding:20px;
+border-radius:15px;
+margin-top:30px;
 }
 
 audio{
-  width:100%;
-  margin-top:20px;
+width:100%;
+margin-top:25px;
 }
 
 .loading{
-  text-align:center;
-  padding:50px 20px;
+text-align:center;
+padding:60px 20px;
 }
 
 .error{
-  color:#a33;
-  text-align:center;
-  padding:50px 20px;
+text-align:center;
+padding:60px 20px;
+color:#a33;
 }
+
 </style>
+
 </head>
 
+
 <body>
+
 
 <div id="app">
 
@@ -95,6 +120,7 @@ audio{
 </div>
 
 </div>
+
 
 
 <script>
@@ -106,6 +132,9 @@ document.getElementById("app");
 
 
 try{
+
+
+/* CEK SUPABASE */
 
 if(
 typeof supabaseClient === "undefined" ||
@@ -119,7 +148,7 @@ throw new Error(
 }
 
 
-/* AMBIL SLUG DARI LINK */
+/* AMBIL SLUG */
 
 const params =
 new URLSearchParams(
@@ -139,7 +168,7 @@ throw new Error(
 }
 
 
-/* CARI DATA */
+/* AMBIL DATA */
 
 const result =
 await supabaseClient
@@ -162,6 +191,40 @@ const data =
 result.data;
 
 
+/* FOTO */
+
+let fotoHTML = "";
+
+if(data.foto_url){
+
+fotoHTML = `
+<img
+src="${data.foto_url}"
+alt="Foto Pengantin"
+>
+`;
+
+}
+
+
+/* MUSIK */
+
+let musikHTML = "";
+
+if(data.musik_ur){
+
+musikHTML = `
+<audio controls autoplay loop>
+<source
+src="${data.musik_ur}"
+>
+Browser tidak mendukung musik.
+</audio>
+`;
+
+}
+
+
 /* TAMPILKAN */
 
 app.innerHTML = `
@@ -170,26 +233,28 @@ app.innerHTML = `
 
 <div class="card">
 
+
 <p>
 THE WEDDING OF
 </p>
 
+
 <h1>
+
 ${data.nama_pria}
+
 <br>
+
 &
+
 <br>
+
 ${data.nama_wanita}
+
 </h1>
 
 
-${
-data.foto_url
-?
-`<img src="${data.foto_url}" alt="Foto Pengantin">`
-:
-""
-}
+${fotoHTML}
 
 
 <div class="info">
@@ -199,18 +264,25 @@ data.foto_url
 </h2>
 
 <p>
-📅 ${data.tanggal_acara}
+📅 <strong>Tanggal</strong>
+<br>
+${data.tanggal_acara}
 </p>
 
 <p>
-⏰ ${data.jam_acara}
+⏰ <strong>Waktu</strong>
+<br>
+${data.jam_acara}
 </p>
 
 <p>
-📍 ${data.lokasi}
+📍 <strong>Lokasi</strong>
+<br>
+${data.lokasi}
 </p>
 
 </div>
+
 
 
 <div class="story">
@@ -226,6 +298,7 @@ ${data.love_story}
 </div>
 
 
+
 <div class="rekening">
 
 <h2>
@@ -237,26 +310,19 @@ ${data.nama_rekening}
 </p>
 
 <p>
+Nomor Rekening:
+<br>
+
 <strong>
 ${data.rekening}
 </strong>
+
 </p>
 
 </div>
 
 
-${
-data.musik_ur
-?
-`
-<audio controls>
-<source src="${data.musik_ur}">
-Browser tidak mendukung audio.
-</audio>
-`
-:
-""
-}
+${musikHTML}
 
 
 </div>
@@ -266,6 +332,7 @@ Browser tidak mendukung audio.
 `;
 
 }
+
 
 catch(error){
 
@@ -278,7 +345,7 @@ app.innerHTML = `
 </h2>
 
 <p>
-Periksa kembali link undangan.
+Silakan periksa kembali link undangan.
 </p>
 
 </div>
@@ -294,5 +361,7 @@ tampilkanUndangan();
 
 </script>
 
+
 </body>
+
 </html>
