@@ -4,45 +4,13 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Undangan Pernikahan</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
-.reveal{
-  opacity:0;
-  transform:translateY(45px);
-  transition:opacity 1s ease, transform 1s ease;
-}
 
-.reveal.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.reveal-left{
-  opacity:0;
-  transform:translateX(-50px);
-  transition:opacity 1s ease, transform 1s ease;
-}
-
-.reveal-left.show{
-  opacity:1;
-  transform:translateX(0);
-}
-
-.reveal-right{
-  opacity:0;
-  transform:translateX(50px);
-  transition:opacity 1s ease, transform 1s ease;
-}
-
-.reveal-right.show{
-  opacity:1;
-  transform:translateX(0);
-}
 <style>
 
 /* ================= DASAR ================= */
@@ -61,6 +29,7 @@ body{
 font-family:Arial,sans-serif;
 background:#f8f3ed;
 color:#4b4038;
+overflow-x:hidden;
 }
 
 section{
@@ -70,6 +39,48 @@ padding:75px 20px;
 .container{
 max-width:700px;
 margin:auto;
+}
+
+
+/* ================= SCROLL ANIMATION ================= */
+
+.reveal{
+opacity:0;
+transform:translateY(45px);
+transition:
+opacity 1s ease,
+transform 1s ease;
+}
+
+.reveal.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.reveal-left{
+opacity:0;
+transform:translateX(-50px);
+transition:
+opacity 1s ease,
+transform 1s ease;
+}
+
+.reveal-left.show{
+opacity:1;
+transform:translateX(0);
+}
+
+.reveal-right{
+opacity:0;
+transform:translateX(50px);
+transition:
+opacity 1s ease,
+transform 1s ease;
+}
+
+.reveal-right.show{
+opacity:1;
+transform:translateX(0);
 }
 
 
@@ -100,7 +111,9 @@ linear-gradient(
 #faf5ee
 );
 
-transition:1s;
+transition:
+opacity 1s ease,
+visibility 1s ease;
 }
 
 .cover.hide{
@@ -115,7 +128,7 @@ max-width:500px;
 
 padding:45px 25px;
 
-background:rgba(255,255,255,.7);
+background:rgba(255,255,255,.78);
 
 border-radius:30px;
 
@@ -198,6 +211,11 @@ font-size:19px;
 display:none;
 
 cursor:pointer;
+
+box-shadow:
+0 5px 20px rgba(0,0,0,.15);
+
+animation:float 3s ease-in-out infinite;
 }
 
 
@@ -268,9 +286,12 @@ margin:auto;
 
 .quote{
 margin-top:25px;
+
 font-size:13px;
 font-style:italic;
+
 line-height:1.8;
+
 color:#777;
 }
 
@@ -284,7 +305,9 @@ text-align:center;
 
 .couple-title{
 font-family:Georgia,serif;
+
 font-size:34px;
+
 font-weight:normal;
 
 margin-bottom:35px;
@@ -483,7 +506,7 @@ box-shadow:
 }
 
 
-/* ================= REKENING ================= */
+/* ================= WEDDING GIFT ================= */
 
 .gift{
 background:#eee0d0;
@@ -667,7 +690,7 @@ padding:60px 15px;
 <body>
 
 
-<!-- LOADING -->
+<!-- ================= LOADING ================= -->
 
 <div
 id="loading"
@@ -696,17 +719,23 @@ id="cover"
 
 
 <div class="bismillah">
+
 بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+
 </div>
 
 
 <div class="cover-small">
+
 THE WEDDING OF
+
 </div>
 
 
 <h1 id="coverNames">
+
 Fitria & Agung
+
 </h1>
 
 
@@ -747,7 +776,9 @@ preload="auto"
 class="music-btn"
 id="musicButton"
 >
+
 🎵
+
 </button>
 
 
@@ -759,17 +790,23 @@ id="musicButton"
 
 
 <div class="hero-bismillah">
+
 بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+
 </div>
 
 
 <div class="hero-small">
+
 THE WEDDING OF
+
 </div>
 
 
 <h1 id="heroNames">
+
 Fitria & Agung
+
 </h1>
 
 
@@ -777,7 +814,9 @@ Fitria & Agung
 class="hero-date"
 id="heroDate"
 >
+
 -
+
 </p>
 
 
@@ -796,7 +835,9 @@ id="heroDate"
 <div class="section-title">
 
 <h2>
+
 Assalamu'alaikum Warahmatullahi Wabarakatuh
+
 </h2>
 
 </div>
@@ -838,7 +879,9 @@ QS. Ar-Rum: 21
 
 
 <h2 class="couple-title">
+
 Mempelai
+
 </h2>
 
 
@@ -847,7 +890,9 @@ Mempelai
 <div class="bride">
 
 <div class="couple-name">
+
 Fitria
+
 </div>
 
 <div class="couple-info">
@@ -855,7 +900,9 @@ Fitria
 Putri dari<br>
 
 <strong>
+
 Bapak & Ibu
+
 </strong>
 
 </div>
@@ -864,7 +911,9 @@ Bapak & Ibu
 
 
 <div class="and">
+
 &
+
 </div>
 
 
@@ -873,7 +922,9 @@ Bapak & Ibu
 <div class="groom">
 
 <div class="couple-name">
+
 Agung
+
 </div>
 
 <div class="couple-info">
@@ -881,7 +932,9 @@ Agung
 Putra dari<br>
 
 <strong>
+
 Bapak & Ibu
+
 </strong>
 
 </div>
@@ -905,6 +958,7 @@ Bapak & Ibu
 class="photo-frame"
 id="photoContainer"
 >
+
 </div>
 
 
@@ -923,12 +977,16 @@ id="photoContainer"
 <div class="section-title">
 
 <h2>
+
 Detail Acara
+
 </h2>
 
 <p>
+
 Dengan penuh kebahagiaan,
 kami menantikan kehadiran Anda.
+
 </p>
 
 </div>
@@ -940,15 +998,21 @@ kami menantikan kehadiran Anda.
 <div class="event-item">
 
 <div class="event-icon">
+
 💍
+
 </div>
 
 <h3>
+
 Akad & Resepsi
+
 </h3>
 
 <p id="tanggal">
+
 -
+
 </p>
 
 </div>
@@ -957,15 +1021,21 @@ Akad & Resepsi
 <div class="event-item">
 
 <div class="event-icon">
+
 ⏰
+
 </div>
 
 <h3>
+
 Waktu
+
 </h3>
 
 <p id="jam">
+
 -
+
 </p>
 
 </div>
@@ -974,15 +1044,21 @@ Waktu
 <div class="event-item">
 
 <div class="event-icon">
+
 📍
+
 </div>
 
 <h3>
+
 Tempat
+
 </h3>
 
 <p id="lokasi">
+
 -
+
 </p>
 
 
@@ -991,6 +1067,7 @@ id="mapButton"
 class="map-btn"
 href="#"
 target="_blank"
+rel="noopener"
 >
 
 📍 Lihat Lokasi
@@ -1018,11 +1095,15 @@ target="_blank"
 <div class="section-title">
 
 <h2>
+
 Love Story
+
 </h2>
 
 <p>
+
 Perjalanan kecil menuju hari bahagia kami.
+
 </p>
 
 </div>
@@ -1053,12 +1134,16 @@ id="loveStory"
 <div class="section-title">
 
 <h2>
+
 Wedding Gift
+
 </h2>
 
 <p>
+
 Doa dan restu Anda adalah hadiah
 terindah bagi kami.
+
 </p>
 
 </div>
@@ -1067,13 +1152,23 @@ terindah bagi kami.
 <div class="gift-card">
 
 
-<p class="bank" id="namaRekening">
+<p
+class="bank"
+id="namaRekening"
+>
+
 -
+
 </p>
 
 
-<p class="account" id="rekening">
+<p
+class="account"
+id="rekening"
+>
+
 -
+
 </p>
 
 
@@ -1091,11 +1186,11 @@ Salin Nomor Rekening
 class="copy-message"
 id="copyMessage"
 >
+
 </p>
 
 
 </div>
-
 
 </div>
 
@@ -1108,7 +1203,9 @@ id="copyMessage"
 
 
 <h2>
+
 Terima Kasih
+
 </h2>
 
 
@@ -1136,12 +1233,16 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh
 
 
 <p>
+
 🤎
+
 </p>
 
 
 <p id="footerNames">
+
 Fitria & Agung
+
 </p>
 
 
@@ -1153,17 +1254,20 @@ Fitria & Agung
 
 <script>
 
-
 /* ================= FORMAT TANGGAL ================= */
 
 function formatTanggal(tanggal){
 
 if(!tanggal){
+
 return "-";
+
 }
 
 const date =
-new Date(tanggal + "T00:00:00");
+new Date(
+tanggal + "T00:00:00"
+);
 
 return date.toLocaleDateString(
 "id-ID",
@@ -1182,7 +1286,9 @@ year:"numeric"
 function formatJam(jam){
 
 if(!jam){
+
 return "-";
+
 }
 
 return jam.substring(0,5) + " WIB";
@@ -1190,7 +1296,7 @@ return jam.substring(0,5) + " WIB";
 }
 
 
-/* ================= LOAD ================= */
+/* ================= LOAD UNDANGAN ================= */
 
 async function loadInvitation(){
 
@@ -1263,10 +1369,16 @@ result.data;
 
 /* ================= NAMA ================= */
 
+const namaWanita =
+data.nama_wanita || "Fitria";
+
+const namaPria =
+data.nama_pria || "Agung";
+
 const nama =
-data.nama_wanita +
+namaWanita +
 " & " +
-data.nama_pria;
+namaPria;
 
 
 document
@@ -1319,17 +1431,19 @@ data.jam_acara
 
 /* ================= LOKASI ================= */
 
+const lokasi =
+data.lokasi || "-";
+
+
 document
 .getElementById("lokasi")
 .textContent =
-data.lokasi || "-";
+lokasi;
 
 
 const mapUrl =
 "https://www.google.com/maps/search/?api=1&query=" +
-encodeURIComponent(
-data.lokasi || ""
-);
+encodeURIComponent(lokasi);
 
 
 document
@@ -1370,12 +1484,15 @@ document
 
 <img
 src="${data.foto_url}"
-alt="Foto Fitria dan Agung"
+alt="Foto ${nama}"
+loading="lazy"
 >
 
 `;
 
-}else{
+}
+
+else{
 
 document
 .getElementById("photoContainer")
@@ -1413,7 +1530,7 @@ data.musik_ur;
 }
 
 
-/* ================= TAMPIL ================= */
+/* ================= TAMPILKAN ================= */
 
 document
 .getElementById("loading")
@@ -1427,6 +1544,26 @@ document
 "block";
 
 
+/* AKTIFKAN ANIMASI */
+
+setTimeout(
+function(){
+
+document
+.querySelectorAll(".reveal")
+.forEach(
+function(element){
+
+observer.observe(element);
+
+}
+);
+
+},
+100
+);
+
+
 }
 
 catch(error){
@@ -1438,11 +1575,15 @@ document
 <div class="error">
 
 <h2>
+
 ❌ ${error.message}
+
 </h2>
 
 <p style="margin-top:10px;">
+
 Periksa kembali data undangan.
+
 </p>
 
 </div>
@@ -1454,7 +1595,7 @@ Periksa kembali data undangan.
 }
 
 
-/* ================= BUKA ================= */
+/* ================= BUKA UNDANGAN ================= */
 
 document
 .getElementById("openButton")
@@ -1531,7 +1672,9 @@ console.log(error);
 
 }
 
-}else{
+}
+
+else{
 
 audio.pause();
 
@@ -1593,21 +1736,25 @@ document
 });
 
 
-/* ================= MULAI ================= */
-
 /* ================= SCROLL ANIMATION ================= */
 
 const observer =
 new IntersectionObserver(
-(entries) => {
+function(entries){
 
-entries.forEach((entry) => {
+entries.forEach(
+function(entry){
 
 if(entry.isIntersecting){
-entry.target.classList.add("show");
+
+entry.target
+.classList
+.add("show");
+
 }
 
-});
+}
+);
 
 },
 {
@@ -1616,37 +1763,42 @@ threshold:0.15
 );
 
 
+/* DAFTARKAN SEMUA BAGIAN */
+
 document
 .querySelectorAll(
 ".opening, .couple, .photo-section, .event, .story, .gift, .closing"
 )
-.forEach((element) => {
+.forEach(
+function(element){
 
 element.classList.add("reveal");
 
-observer.observe(element);
+}
+);
 
-});
 
+/* DAFTARKAN FOTO */
 
 const photo =
-document.querySelector(".photo-frame");
+document.querySelector(
+".photo-frame"
+);
 
 if(photo){
 
-photo.classList.add("reveal");
-
-observer.observe(photo);
+photo.classList.add(
+"reveal"
+);
 
 }
 
 
-/* MULAI WEBSITE */
+/* ================= MULAI ================= */
 
 loadInvitation();
 
 </script>
-
 
 </body>
 
