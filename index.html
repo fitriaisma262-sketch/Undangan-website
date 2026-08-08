@@ -593,13 +593,14 @@ required
 >
 
 
-<label for="tempat">
-📍 Tempat Acara
+<label for="lokasi">
+📍 Lokasi Acara
 </label>
 
 <input
 type="text"
-id="tempat"
+id="lokasi"
+placeholder="Gedung / Rumah / Hotel"
 required
 >
 
@@ -734,7 +735,7 @@ throw new Error(
 }
 
 
-/* AMBIL DATA */
+/* DATA FORM */
 
 const namaPria =
 document
@@ -769,9 +770,9 @@ document
 .value;
 
 
-const tempat =
+const lokasi =
 document
-.getElementById("tempat")
+.getElementById("lokasi")
 .value
 .trim();
 
@@ -809,41 +810,34 @@ document
 .files[0];
 
 
-/* CEK */
+/* CEK DATA */
 
 if(!namaPria)
 throw new Error("Nama pria belum diisi.");
 
-
 if(!namaWanita)
 throw new Error("Nama wanita belum diisi.");
-
 
 if(!judul)
 throw new Error("Judul undangan belum diisi.");
 
-
 if(!tanggalAcara)
 throw new Error("Tanggal acara belum dipilih.");
-
 
 if(!jamAcara)
 throw new Error("Jam acara belum dipilih.");
 
-
-if(!tempat)
-throw new Error("Tempat acara belum diisi.");
-
+if(!lokasi)
+throw new Error("Lokasi acara belum diisi.");
 
 if(!fotoFile)
 throw new Error("Foto belum dipilih.");
-
 
 if(!musikFile)
 throw new Error("Musik belum dipilih.");
 
 
-/* FOTO */
+/* UPLOAD FOTO */
 
 const fotoNama =
 Date.now() +
@@ -858,7 +852,6 @@ fotoFile.name
 "-"
 );
 
-
 const fotoPath =
 "foto/" + fotoNama;
 
@@ -871,8 +864,7 @@ await supabaseClient
 fotoPath,
 fotoFile,
 {
-contentType:
-fotoFile.type,
+contentType:fotoFile.type,
 upsert:false
 }
 );
@@ -892,14 +884,12 @@ const fotoUrl =
 supabaseClient
 .storage
 .from("foto-undangan")
-.getPublicUrl(
-fotoPath
-)
+.getPublicUrl(fotoPath)
 .data
 .publicUrl;
 
 
-/* MUSIK */
+/* UPLOAD MUSIK */
 
 const musikNama =
 Date.now() +
@@ -914,7 +904,6 @@ musikFile.name
 "-"
 );
 
-
 const musikPath =
 "musik/" + musikNama;
 
@@ -927,8 +916,7 @@ await supabaseClient
 musikPath,
 musikFile,
 {
-contentType:
-musikFile.type,
+contentType:musikFile.type,
 upsert:false
 }
 );
@@ -948,14 +936,12 @@ const musikUrl =
 supabaseClient
 .storage
 .from("foto-undangan")
-.getPublicUrl(
-musikPath
-)
+.getPublicUrl(musikPath)
 .data
 .publicUrl;
 
 
-/* DATA DATABASE */
+/* DATA UNTUK DATABASE */
 
 const data = {
 
@@ -974,8 +960,8 @@ tanggalAcara,
 jam_acara:
 jamAcara,
 
-tempat:
-tempat,
+lokasi:
+lokasi,
 
 foto:
 fotoUrl,
@@ -995,27 +981,22 @@ wa
 };
 
 
-/* PASTIKAN TANGGAL DAN JAM ADA */
+/* CEK LAGI */
 
 if(!data.tanggal_acara){
-
-throw new Error(
-"Tanggal acara kosong."
-);
-
+throw new Error("Tanggal acara kosong.");
 }
-
 
 if(!data.jam_acara){
+throw new Error("Jam acara kosong.");
+}
 
-throw new Error(
-"Jam acara kosong."
-);
-
+if(!data.lokasi){
+throw new Error("Lokasi acara kosong.");
 }
 
 
-/* SIMPAN */
+/* SIMPAN KE SUPABASE */
 
 const result =
 await supabaseClient
@@ -1070,4 +1051,4 @@ false;
 </script>
 
 </body>
-  </html>
+</html>
