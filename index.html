@@ -1,257 +1,288 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
 <title>Fitria Invitation</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="supabase.js"></script>
 
+
 <style>
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-  font-family:Arial,sans-serif;
-  background:#faf7f2;
-  color:#493d34;
+font-family:Arial,sans-serif;
+background:#faf7f2;
+color:#493d34;
 }
 
 header{
-  padding:20px 7%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:white;
-  position:sticky;
-  top:0;
-  z-index:10;
+padding:20px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:white;
+position:sticky;
+top:0;
+z-index:10;
 }
 
 .logo{
-  font-family:Georgia,serif;
-  font-size:24px;
+font-family:Georgia,serif;
+font-size:24px;
 }
 
 nav a{
-  margin-left:15px;
-  text-decoration:none;
-  color:#493d34;
+margin-left:15px;
+text-decoration:none;
+color:#493d34;
 }
 
 .hero{
-  text-align:center;
-  padding:90px 20px;
-  background:#eee2d2;
+text-align:center;
+padding:90px 20px;
+background:#eee2d2;
 }
 
 .hero h1{
-  font-family:Georgia,serif;
-  font-size:48px;
-  font-weight:normal;
-  margin-bottom:15px;
+font-family:Georgia,serif;
+font-size:48px;
+font-weight:normal;
+margin-bottom:15px;
 }
 
 .hero p{
-  max-width:550px;
-  margin:auto;
-  line-height:1.8;
+max-width:550px;
+margin:auto;
+line-height:1.8;
 }
 
 .btn{
-  display:inline-block;
-  margin-top:25px;
-  padding:13px 25px;
-  border-radius:30px;
-  background:#876f52;
-  color:white;
-  text-decoration:none;
+display:inline-block;
+margin-top:25px;
+padding:13px 25px;
+border-radius:30px;
+background:#876f52;
+color:white;
+text-decoration:none;
 }
 
 section{
-  padding:70px 7%;
+padding:70px 7%;
 }
 
 .title{
-  text-align:center;
-  margin-bottom:40px;
+text-align:center;
+margin-bottom:40px;
 }
 
 .title h2{
-  font-family:Georgia,serif;
-  font-size:35px;
-  font-weight:normal;
-  margin-bottom:10px;
+font-family:Georgia,serif;
+font-size:35px;
+font-weight:normal;
+margin-bottom:10px;
 }
 
 .templates{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:25px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:25px;
 }
 
 .template{
-  background:white;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 7px 25px rgba(0,0,0,.08);
+background:white;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 7px 25px rgba(0,0,0,.08);
 }
 
 .preview{
-  height:280px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:20px;
+height:280px;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
 }
 
-.floral{background:#eee0d0}
-.classic{background:#e8dfd5}
-.emerald{background:#dce8df}
-.luxury{background:#e5dfd4}
+.floral{
+background:#eee0d0;
+}
+
+.classic{
+background:#e8dfd5;
+}
+
+.emerald{
+background:#dce8df;
+}
+
+.luxury{
+background:#e5dfd4;
+}
 
 .preview p{
-  font-size:12px;
-  letter-spacing:2px;
-  margin-bottom:10px;
+font-size:12px;
+letter-spacing:2px;
+margin-bottom:10px;
 }
 
 .preview h3{
-  font-family:Georgia,serif;
-  font-size:30px;
-  font-weight:normal;
+font-family:Georgia,serif;
+font-size:30px;
+font-weight:normal;
 }
 
 .info{
-  padding:22px;
+padding:22px;
 }
 
 .info h3{
-  margin-bottom:8px;
+margin-bottom:8px;
 }
 
 .info p{
-  color:#777;
-  font-size:14px;
-  line-height:1.6;
+color:#777;
+font-size:14px;
+line-height:1.6;
 }
 
 .price{
-  font-size:22px;
-  font-weight:bold;
-  margin-top:15px;
+font-size:22px;
+font-weight:bold;
+margin-top:15px;
 }
 
 .features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:18px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:18px;
 }
 
 .feature{
-  background:white;
-  padding:25px;
-  border-radius:16px;
-  text-align:center;
+background:white;
+padding:25px;
+border-radius:16px;
+text-align:center;
 }
 
 .feature span{
-  display:block;
-  font-size:30px;
-  margin-bottom:10px;
+display:block;
+font-size:30px;
+margin-bottom:10px;
 }
 
 .feature p{
-  margin-top:8px;
-  color:#777;
-  font-size:14px;
-  line-height:1.5;
+margin-top:8px;
+color:#777;
+font-size:14px;
+line-height:1.5;
 }
 
 .order{
-  background:#eee2d2;
+background:#eee2d2;
 }
 
 .form-box{
-  max-width:650px;
-  margin:auto;
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 7px 25px rgba(0,0,0,.08);
+max-width:650px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 7px 25px rgba(0,0,0,.08);
 }
 
 .form-box label{
-  display:block;
-  margin-top:15px;
-  margin-bottom:7px;
-  font-weight:bold;
+display:block;
+margin-top:15px;
+margin-bottom:7px;
+font-weight:bold;
 }
 
-.form-box input{
-  width:100%;
-  padding:12px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  font-size:15px;
+.form-box input,
+.form-box textarea,
+.form-box select{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:15px;
+font-family:Arial,sans-serif;
+}
+
+.form-box textarea{
+resize:vertical;
 }
 
 .form-box button{
-  width:100%;
-  margin-top:25px;
-  padding:14px;
-  border:0;
-  border-radius:30px;
-  background:#876f52;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
+width:100%;
+margin-top:25px;
+padding:14px;
+border:0;
+border-radius:30px;
+background:#876f52;
+color:white;
+font-size:16px;
+cursor:pointer;
 }
 
 .form-box button:disabled{
-  opacity:.6;
+opacity:.6;
 }
 
 #hasil{
-  margin-top:15px;
-  text-align:center;
-  font-weight:bold;
-  line-height:1.5;
+margin-top:15px;
+text-align:center;
+font-weight:bold;
+line-height:1.5;
 }
 
 footer{
-  padding:35px;
-  text-align:center;
-  background:#493d34;
-  color:white;
+padding:35px;
+text-align:center;
+background:#493d34;
+color:white;
 }
 
 @media(max-width:600px){
 
-  .hero h1{
-    font-size:38px;
-  }
+.hero h1{
+font-size:38px;
+}
 
-  nav a{
-    margin-left:8px;
-    font-size:13px;
-  }
+nav a{
+margin-left:8px;
+font-size:13px;
+}
 
-  .form-box{
-    padding:20px;
-  }
+.form-box{
+padding:20px;
+}
 
 }
+
 </style>
+
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -260,17 +291,30 @@ Fitria Invitation
 </div>
 
 <nav>
-<a href="#template">Template</a>
-<a href="#fitur">Fitur</a>
-<a href="#pesan">Pesan</a>
+
+<a href="#template">
+Template
+</a>
+
+<a href="#fitur">
+Fitur
+</a>
+
+<a href="#pesan">
+Pesan
+</a>
+
 </nav>
 
 </header>
 
 
+
 <section class="hero">
 
-<h1>Undangan Digital</h1>
+<h1>
+Undangan Digital
+</h1>
 
 <p>
 Buat hari istimewa semakin berkesan
@@ -278,18 +322,24 @@ dengan undangan digital yang elegan,
 modern dan mudah dibagikan.
 </p>
 
-<a class="btn" href="#template">
+<a
+class="btn"
+href="#template"
+>
 Lihat Template
 </a>
 
 </section>
 
 
+
 <section id="template">
 
 <div class="title">
 
-<h2>Pilih Template</h2>
+<h2>
+Pilih Template
+</h2>
 
 <p>
 Temukan desain yang paling cocok untuk hari bahagiamu.
@@ -307,11 +357,15 @@ Temukan desain yang paling cocok untuk hari bahagiamu.
 
 <div>
 
-<p>THE WEDDING OF</p>
+<p>
+THE WEDDING OF
+</p>
 
 <h3>
 Fitria
-<br>&<br>
+<br>
+&
+<br>
 Pasangan
 </h3>
 
@@ -321,7 +375,9 @@ Pasangan
 
 <div class="info">
 
-<h3>🌸 Floral</h3>
+<h3>
+🌸 Floral
+</h3>
 
 <p>
 Desain lembut dan romantis dengan nuansa bunga.
@@ -336,17 +392,22 @@ Rp69.000
 </div>
 
 
+
 <div class="template">
 
 <div class="preview classic">
 
 <div>
 
-<p>THE WEDDING OF</p>
+<p>
+THE WEDDING OF
+</p>
 
 <h3>
 Fitria
-<br>&<br>
+<br>
+&
+<br>
 Pasangan
 </h3>
 
@@ -356,7 +417,9 @@ Pasangan
 
 <div class="info">
 
-<h3>🤎 Classic</h3>
+<h3>
+🤎 Classic
+</h3>
 
 <p>
 Desain sederhana, elegan dan timeless.
@@ -371,17 +434,22 @@ Rp88.000
 </div>
 
 
+
 <div class="template">
 
 <div class="preview emerald">
 
 <div>
 
-<p>THE WEDDING OF</p>
+<p>
+THE WEDDING OF
+</p>
 
 <h3>
 Fitria
-<br>&<br>
+<br>
+&
+<br>
 Pasangan
 </h3>
 
@@ -391,7 +459,9 @@ Pasangan
 
 <div class="info">
 
-<h3>💚 Emerald</h3>
+<h3>
+💚 Emerald
+</h3>
 
 <p>
 Nuansa hijau elegan untuk tampilan yang mewah.
@@ -406,17 +476,22 @@ Rp100.000
 </div>
 
 
+
 <div class="template">
 
 <div class="preview luxury">
 
 <div>
 
-<p>THE WEDDING OF</p>
+<p>
+THE WEDDING OF
+</p>
 
 <h3>
 Fitria
-<br>&<br>
+<br>
+&
+<br>
 Pasangan
 </h3>
 
@@ -426,7 +501,9 @@ Pasangan
 
 <div class="info">
 
-<h3>✨ Luxury</h3>
+<h3>
+✨ Luxury
+</h3>
 
 <p>
 Tampilan mewah dan elegan untuk hari spesial.
@@ -446,11 +523,14 @@ Rp150.000
 </section>
 
 
+
 <section id="fitur">
 
 <div class="title">
 
-<h2>Fitur Undangan</h2>
+<h2>
+Fitur Undangan
+</h2>
 
 <p>
 Semua yang dibutuhkan untuk undangan digitalmu.
@@ -464,9 +544,13 @@ Semua yang dibutuhkan untuk undangan digitalmu.
 
 <div class="feature">
 
-<span>💌</span>
+<span>
+💌
+</span>
 
-<h3>Nama Pengantin</h3>
+<h3>
+Nama Pengantin
+</h3>
 
 <p>
 Tampilkan nama pasangan dengan desain elegan.
@@ -477,9 +561,13 @@ Tampilkan nama pasangan dengan desain elegan.
 
 <div class="feature">
 
-<span>📅</span>
+<span>
+📅
+</span>
 
-<h3>Detail Acara</h3>
+<h3>
+Detail Acara
+</h3>
 
 <p>
 Tanggal, waktu dan lokasi acara dapat ditampilkan.
@@ -490,9 +578,13 @@ Tanggal, waktu dan lokasi acara dapat ditampilkan.
 
 <div class="feature">
 
-<span>💖</span>
+<span>
+💖
+</span>
 
-<h3>Love Story</h3>
+<h3>
+Love Story
+</h3>
 
 <p>
 Ceritakan perjalanan cinta kalian.
@@ -503,9 +595,30 @@ Ceritakan perjalanan cinta kalian.
 
 <div class="feature">
 
-<span>📱</span>
+<span>
+💳
+</span>
 
-<h3>Mudah Dibagikan</h3>
+<h3>
+Rekening
+</h3>
+
+<p>
+Tambahkan informasi rekening untuk hadiah digital.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<span>
+📱
+</span>
+
+<h3>
+Mudah Dibagikan
+</h3>
 
 <p>
 Undangan dapat dibagikan melalui link.
@@ -519,11 +632,17 @@ Undangan dapat dibagikan melalui link.
 </section>
 
 
-<section class="order" id="pesan">
+
+<section
+class="order"
+id="pesan"
+>
 
 <div class="title">
 
-<h2>Pesan Undangan</h2>
+<h2>
+Pesan Undangan
+</h2>
 
 <p>
 Isi data pasanganmu untuk mulai membuat undangan digital.
@@ -532,12 +651,14 @@ Isi data pasanganmu untuk mulai membuat undangan digital.
 </div>
 
 
+
 <div class="form-box">
+
 
 <form id="undanganForm">
 
 
-<label for="nama_pria">
+<label>
 Nama Pria
 </label>
 
@@ -548,7 +669,8 @@ required
 >
 
 
-<label for="nama_wanita">
+
+<label>
 Nama Wanita
 </label>
 
@@ -559,20 +681,9 @@ required
 >
 
 
-<label for="title">
-Judul Undangan
-</label>
 
-<input
-type="text"
-id="title"
-placeholder="Pernikahan Andi & Sari"
-required
->
-
-
-<label for="tanggal_acara">
-📅 Tanggal Acara
+<label>
+Tanggal Acara
 </label>
 
 <input
@@ -582,8 +693,9 @@ required
 >
 
 
-<label for="jam_acara">
-⏰ Jam Acara
+
+<label>
+Jam Acara
 </label>
 
 <input
@@ -593,8 +705,9 @@ required
 >
 
 
-<label for="lokasi">
-📍 Lokasi Acara
+
+<label>
+Lokasi
 </label>
 
 <input
@@ -605,7 +718,21 @@ required
 >
 
 
-<label for="foto">
+
+<label>
+💖 Love Story
+</label>
+
+<textarea
+id="love_story"
+rows="5"
+placeholder="Ceritakan kisah cinta kalian..."
+required
+></textarea>
+
+
+
+<label>
 📷 Foto Pengantin
 </label>
 
@@ -617,7 +744,8 @@ required
 >
 
 
-<label for="musik">
+
+<label>
 🎵 Musik Undangan
 </label>
 
@@ -629,7 +757,67 @@ required
 >
 
 
-<label for="status">
+
+<label>
+💳 Nomor Rekening
+</label>
+
+<input
+type="text"
+id="rekening"
+placeholder="1234567890"
+required
+>
+
+
+
+<label>
+👤 Nama Pemilik Rekening
+</label>
+
+<input
+type="text"
+id="nama_rekening"
+placeholder="Nama pemilik rekening"
+required
+>
+
+
+
+<label>
+Template
+</label>
+
+<select
+id="template"
+required
+>
+
+<option value="">
+Pilih template
+</option>
+
+<option value="floral">
+Floral
+</option>
+
+<option value="classic">
+Classic
+</option>
+
+<option value="emerald">
+Emerald
+</option>
+
+<option value="luxury">
+Luxury
+</option>
+
+</select>
+
+
+
+<label>
 Status
 </label>
 
@@ -641,7 +829,8 @@ required
 >
 
 
-<label for="slug">
+
+<label>
 Slug
 </label>
 
@@ -653,15 +842,31 @@ required
 >
 
 
-<label for="wa">
+
+<label>
 WhatsApp
 </label>
 
 <input
 type="text"
-id="wa"
+id="whatsaap"
 placeholder="628xxxxxxxxxx"
+required
 >
+
+
+
+<label>
+Judul Undangan
+</label>
+
+<input
+type="text"
+id="title"
+placeholder="Pernikahan Andi & Sari"
+required
+>
+
 
 
 <button
@@ -674,6 +879,7 @@ id="submitBtn"
 
 <p id="hasil"></p>
 
+
 </form>
 
 </div>
@@ -681,15 +887,18 @@ id="submitBtn"
 </section>
 
 
+
 <footer>
 
 Fitria Invitation
 
-<br><br>
+<br>
+<br>
 
 Undangan digital elegan untuk hari istimewa 🤎
 
 </footer>
+
 
 
 <script>
@@ -735,7 +944,7 @@ throw new Error(
 }
 
 
-/* DATA FORM */
+/* AMBIL DATA */
 
 const namaPria =
 document
@@ -747,13 +956,6 @@ document
 const namaWanita =
 document
 .getElementById("nama_wanita")
-.value
-.trim();
-
-
-const judul =
-document
-.getElementById("title")
 .value
 .trim();
 
@@ -777,9 +979,23 @@ document
 .trim();
 
 
-const status =
+const loveStory =
 document
-.getElementById("status")
+.getElementById("love_story")
+.value
+.trim();
+
+
+const rekening =
+document
+.getElementById("rekening")
+.value
+.trim();
+
+
+const namaRekening =
+document
+.getElementById("nama_rekening")
 .value
 .trim();
 
@@ -791,9 +1007,29 @@ document
 .trim();
 
 
-const wa =
+const template =
 document
-.getElementById("wa")
+.getElementById("template")
+.value;
+
+
+const status =
+document
+.getElementById("status")
+.value
+.trim();
+
+
+const whatsaap =
+document
+.getElementById("whatsaap")
+.value
+.trim();
+
+
+const title =
+document
+.getElementById("title")
 .value
 .trim();
 
@@ -810,16 +1046,13 @@ document
 .files[0];
 
 
-/* CEK DATA */
+/* CEK */
 
 if(!namaPria)
 throw new Error("Nama pria belum diisi.");
 
 if(!namaWanita)
 throw new Error("Nama wanita belum diisi.");
-
-if(!judul)
-throw new Error("Judul undangan belum diisi.");
 
 if(!tanggalAcara)
 throw new Error("Tanggal acara belum dipilih.");
@@ -828,7 +1061,31 @@ if(!jamAcara)
 throw new Error("Jam acara belum dipilih.");
 
 if(!lokasi)
-throw new Error("Lokasi acara belum diisi.");
+throw new Error("Lokasi belum diisi.");
+
+if(!loveStory)
+throw new Error("Love story belum diisi.");
+
+if(!rekening)
+throw new Error("Nomor rekening belum diisi.");
+
+if(!namaRekening)
+throw new Error("Nama rekening belum diisi.");
+
+if(!slug)
+throw new Error("Slug belum diisi.");
+
+if(!template)
+throw new Error("Template belum dipilih.");
+
+if(!status)
+throw new Error("Status belum diisi.");
+
+if(!whatsaap)
+throw new Error("WhatsApp belum diisi.");
+
+if(!title)
+throw new Error("Judul belum diisi.");
 
 if(!fotoFile)
 throw new Error("Foto belum dipilih.");
@@ -852,6 +1109,7 @@ fotoFile.name
 "-"
 );
 
+
 const fotoPath =
 "foto/" + fotoNama;
 
@@ -864,7 +1122,8 @@ await supabaseClient
 fotoPath,
 fotoFile,
 {
-contentType:fotoFile.type,
+contentType:
+fotoFile.type,
 upsert:false
 }
 );
@@ -884,7 +1143,9 @@ const fotoUrl =
 supabaseClient
 .storage
 .from("foto-undangan")
-.getPublicUrl(fotoPath)
+.getPublicUrl(
+fotoPath
+)
 .data
 .publicUrl;
 
@@ -904,6 +1165,7 @@ musikFile.name
 "-"
 );
 
+
 const musikPath =
 "musik/" + musikNama;
 
@@ -916,7 +1178,8 @@ await supabaseClient
 musikPath,
 musikFile,
 {
-contentType:musikFile.type,
+contentType:
+musikFile.type,
 upsert:false
 }
 );
@@ -936,23 +1199,22 @@ const musikUrl =
 supabaseClient
 .storage
 .from("foto-undangan")
-.getPublicUrl(musikPath)
+.getPublicUrl(
+musikPath
+)
 .data
 .publicUrl;
 
 
-/* DATA UNTUK DATABASE */
+/* DATA DATABASE */
 
 const data = {
-
-nama_pria:
-namaPria,
 
 nama_wanita:
 namaWanita,
 
-title:
-judul,
+nama_pria:
+namaPria,
 
 tanggal_acara:
 tanggalAcara,
@@ -963,40 +1225,43 @@ jamAcara,
 lokasi:
 lokasi,
 
-foto:
+love_story:
+loveStory,
+
+foto_url:
 fotoUrl,
 
-musik:
+musik_ur:
 musikUrl,
 
-status:
-status,
+rekening:
+rekening,
+
+nama_rekening:
+namaRekening,
 
 slug:
 slug,
 
-wa:
-wa
+template:
+template,
+
+status:
+status,
+
+whatsaap:
+whatsaap,
+
+created_at:
+new Date().toISOString(),
+
+title:
+title
 
 };
 
 
-/* CEK LAGI */
-
-if(!data.tanggal_acara){
-throw new Error("Tanggal acara kosong.");
-}
-
-if(!data.jam_acara){
-throw new Error("Jam acara kosong.");
-}
-
-if(!data.lokasi){
-throw new Error("Lokasi acara kosong.");
-}
-
-
-/* SIMPAN KE SUPABASE */
+/* SIMPAN */
 
 const result =
 await supabaseClient
@@ -1011,10 +1276,10 @@ throw new Error(
 result.error.message
 );
 
+
+/* SELESAI */
+
 }
-
-
-/* BERHASIL */
 
 hasil.textContent =
 "✅ Undangan berhasil dibuat!";
@@ -1028,7 +1293,6 @@ document
 
 
 }
-
 catch(error){
 
 hasil.textContent =
@@ -1036,7 +1300,6 @@ hasil.textContent =
 error.message;
 
 }
-
 finally{
 
 submitBtn.disabled =
@@ -1051,4 +1314,5 @@ false;
 </script>
 
 </body>
+
 </html>
